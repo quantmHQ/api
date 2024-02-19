@@ -4,7 +4,11 @@
 
 In the project directory, you can run:
 
-### `npm run codegen`
+```bash
+npm run codegen
+
+npm run generate-types
+```
 
 Generated TypeScript client code from the OpenAPI API specification file.
 
