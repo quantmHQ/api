@@ -14,12 +14,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GithubActionResultRequest"
+              $ref: '#/components/schemas/GithubActionResultRequest'
       responses:
-        "200":
+        '200':
           description: OK
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/webhook:
     post:
@@ -29,22 +29,22 @@ paths:
         TODO: implement openapi generator.
       operationId: github-webhook
       responses:
-        "200":
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WorkflowResponse"
-        "201":
+                $ref: '#/components/schemas/WorkflowResponse'
+        '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WorkflowResponse"
-        "400":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/BadRequest"
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+                $ref: '#/components/schemas/WorkflowResponse'
+        '400':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/BadRequest'
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/complete-installation:
     post:
@@ -62,28 +62,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CompleteInstallationRequest"
+              $ref: '#/components/schemas/CompleteInstallationRequest'
       responses:
-        "200":
+        '200':
           description: GitHub App installation completed
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WorkflowResponse"
-        "201":
+                $ref: '#/components/schemas/WorkflowResponse'
+        '201':
           description: GitHub App installation completed
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WorkflowResponse"
-        "400":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+                $ref: '#/components/schemas/WorkflowResponse'
+        '400':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/Unauthorized'
+        '404':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/NotFound'
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/repos:
     get:
@@ -97,20 +97,20 @@ paths:
         - providers
         - github
       responses:
-        "200":
+        '200':
           description: GitHub repositories
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/GithubRepo"
-        "400":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+                  $ref: '#/components/schemas/GithubRepo'
+        '400':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/installations:
     get:
@@ -124,20 +124,20 @@ paths:
         - providers
         - github
       responses:
-        "200":
+        '200':
           description: GitHub installations
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/GithubInstallation"
-        "400":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+                  $ref: '#/components/schemas/GithubInstallation'
+        '400':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/artifact-ready:
     post:
@@ -154,22 +154,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ArtifactReadyRequest"
+              $ref: '#/components/schemas/ArtifactReadyRequest'
       responses:
-        "200":
-          description: "to fill"
+        '200':
+          description: 'to fill'
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/WorkflowResponse"
-        "400":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+                  $ref: '#/components/schemas/WorkflowResponse'
+        '400':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/BadRequest'
+        '401':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/Unauthorized'
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
   /providers/github/cli-git-merge:
     post:
@@ -181,19 +181,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CliGitMerge"
+              $ref: '#/components/schemas/CliGitMerge'
       responses:
-        "200":
+        '200':
           description: OK
-        "500":
-          $ref: "../../shared/openapi.spec.yaml#/components/responses/InternalServerError"
+        '500':
+          $ref: '../shared/openapi.spec.yaml#/components/responses/InternalServerError'
 
 components:
   securitySchemes:
     BearerAuth:
-      $ref: "../../shared/openapi.spec.yaml#/components/securitySchemes/BearerAuth"
+      $ref: '../shared/openapi.spec.yaml#/components/securitySchemes/BearerAuth'
     APIKeyAuth:
-      $ref: "../../shared/openapi.spec.yaml#/components/securitySchemes/APIKeyAuth"
+      $ref: '../shared/openapi.spec.yaml#/components/securitySchemes/APIKeyAuth'
 
   schemas:
     GithubRepo:
@@ -255,7 +255,7 @@ components:
           type: string
           x-go-name: InstallationID
         registry:
-          $ref: "#/components/schemas/OCIImageRegistry"
+          $ref: '#/components/schemas/OCIImageRegistry'
         digest:
           type: string
       required:
@@ -368,7 +368,7 @@ components:
           format: int64
           x-go-name: InstallationID
         setup_action:
-          $ref: "#/components/schemas/SetupAction"
+          $ref: '#/components/schemas/SetupAction'
       required:
         - installation_id
         - setup_action
@@ -394,7 +394,7 @@ components:
           type: string
           x-go-name: RunID
         status:
-          $ref: "#/components/schemas/WorkflowStatus"
+          $ref: '#/components/schemas/WorkflowStatus'
       required:
         - run_id
         - status
