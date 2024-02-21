@@ -4,6 +4,9 @@ info:
   title: core
   version: 0.0.1
 
+servers:
+  $ref: '../base.spec.yaml#/servers'
+
 paths:
   /core/blueprints:
     post:

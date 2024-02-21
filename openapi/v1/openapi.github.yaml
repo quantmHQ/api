@@ -3,6 +3,9 @@ info:
   title: github
   version: 0.0.1
 
+servers:
+  $ref: '../base.spec.yaml#/servers'
+
 paths:
   /providers/github/cicd-result:
     post:
