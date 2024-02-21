@@ -3,9 +3,6 @@ info:
   title: auth
   version: 0.0.1
 
-servers:
-  $ref: '../shared/base.spec.yaml#/servers'
-
 paths:
   /auth/register:
     post:
