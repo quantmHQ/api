@@ -4,7 +4,7 @@ info:
   version: 0.0.1
 
 servers:
-  $ref: '../base.spec.yaml#/servers'
+  $ref: '../shared/base.spec.yaml#/servers'
 
 paths:
   /providers/github/cicd-result:
