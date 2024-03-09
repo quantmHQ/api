@@ -271,7 +271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/User'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -313,7 +313,7 @@ paths:
           $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/user/{email}:
+  /auth/user/email/{email}:
     get:
       summary: get user by email
       description: get user by email
@@ -334,7 +334,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/User'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -364,7 +364,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/User'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -1061,16 +1061,9 @@ components:
           type: string
         email:
           type: string
-        email_verified:
-          type: string
-          format: date-time
-        image:
-          type: string
       required:
         - name
         - email
-        - email_verified
-        - image
 
     LinkAccount:
       type: object
