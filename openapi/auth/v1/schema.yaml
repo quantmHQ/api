@@ -251,14 +251,13 @@ paths:
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
 
-  /auth/user:
+  /auth/users:
     post:
       summary: create user authjs
       description: create user authjs
       operationId: create-user
       tags:
         - auth
-        - user
       requestBody:
         description: User to create
         content:
@@ -279,62 +278,39 @@ paths:
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
     get:
-      summary: get user by provider and provider account id
+      summary: get users
       description: get user by provider and provider account id
-      operationId: get-user-by-account
+      operationId: list-users
       tags:
         - auth
-        - user
       parameters:
         - name: provider_account_id
           in: query
           description: Provider account ID
-          required: true
+          required: false
           schema:
             type: string
         - name: provider
           in: query
           description: Provider type
-          required: true
+          required: false
           schema:
             type: string
-      responses:
-        '200':
-          description: get user by provider and provider account id
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/user/email/{email}:
-    get:
-      summary: get user by email
-      description: get user by email
-      operationId: get-user-by-email
-      tags:
-        - auth
-        - user
-      parameters:
         - name: email
-          in: path
+          in: query
           description: user email
-          required: true
+          required: false
           schema:
             type: string
       responses:
         '200':
-          description: Get user by email
+          description: user list
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -343,14 +319,14 @@ paths:
           $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/user/{id}:
+
+  /auth/users/{id}:
     get:
       summary: get user by id
       description: get user by id
       operationId: get-user
       tags:
         - auth
-        - user
       parameters:
         - name: id
           in: path
@@ -379,7 +355,6 @@ paths:
       operationId: update-user
       tags:
         - auth
-        - user
       parameters:
         - name: id
           in: path
@@ -399,7 +374,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: '#/components/schemas/User'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -438,41 +413,38 @@ paths:
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
 
-  /auth/link-account:
+  /auth/accounts/link:
     post:
       summary: link user with account
       description: link user with account
       operationId: link-account
       tags:
         - auth
-        - account
       requestBody:
         description: link user to account
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LinkAccount'
+              $ref: '#/components/schemas/LinkAccountRequest'
       responses:
         '200':
           description: link user to account
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Accounts'
+                $ref: '#/components/schemas/Account'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
           $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
         '500':
           $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/unlink-account:
     delete:
       summary: unlink account
       description: unlink account
       operationId: unlink-account
       tags:
         - auth
-        - account
       parameters:
         - name: provider_account_id
           in: query
@@ -493,187 +465,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-
-  /auth/session:
-    post:
-      summary: create session
-      description: create session
-      operationId: create-session
-      tags:
-        - auth
-        - session
-      requestBody:
-        description: session to create
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SessionRequest'
-      responses:
-        '201':
-          description: session created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sessions'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/session/{session_token}:
-    get:
-      summary: get user by session token along with session data
-      description: get user by session token along with session data
-      operationId: get-session-and-user
-      tags:
-        - auth
-        - user
-        - session
-      parameters:
-        - name: session_token
-          in: path
-          description: session token
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Get user by session token along with session data
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAndSession'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-    put:
-      summary: update session by session_token
-      description: update session by session_token
-      operationId: update-session
-      tags:
-        - auth
-        - session
-      parameters:
-        - name: session_token
-          in: path
-          description: session token
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: Session to update
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SessionRequest'
-      responses:
-        '200':
-          description: update session by session token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Sessions'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-    delete:
-      summary: delete session by session token
-      description: delete user by id
-      operationId: delete-session
-      tags:
-        - auth
-        - user
-      parameters:
-        - name: session_token
-          in: path
-          description: session token
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Delete session by session token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeleteResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-
-  /auth/verification_token:
-    post:
-      summary: create verification token
-      description: create verification token
-      operationId: create-verification-token
-      tags:
-        - auth
-        - verification-token
-      requestBody:
-        description: verification token to create
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/VerificationTokenRequest'
-      responses:
-        '201':
-          description: verification token created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationToken'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
-  /auth/verification_token/{identifier}:
-    get:
-      summary: get the verification token by identifier and then delete from database
-      description: get the verification token by identifier and then delete from database
-      operationId: use-verification-token
-      tags:
-        - auth
-        - verification-token
-      parameters:
-        - name: identifier
-          in: path
-          description: token identifier
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: get verification token for usage
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationToken'
         '400':
           $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
         '401':
@@ -908,9 +699,9 @@ components:
         - created_at
         - updated_at
 
-    Accounts:
+    Account:
       type: object
-      x-breu-entity: acounts
+      x-breu-entity: oauth_accounts
       properties:
         id:
           type: string
@@ -919,29 +710,19 @@ components:
           x-go-type: gocql.UUID
         user_id:
           type: string
+          format: uuid
           x-go-name: UserID
+          x-go-type: gocql.UUID
         type:
           type: string
         provider:
           type: string
         provider_account_id:
           type: string
-          x-go-name: ProviderAccountId
-        refresh_token:
-          type: string
-        access_token:
-          type: string
+          x-go-name: ProviderAccountID
         expires_at:
           type: string
           format: date-time
-        id_token:
-          type: string
-        scope:
-          type: string
-        session_state:
-          type: string
-        token_type:
-          type: string
         created_at:
           type: string
           format: date-time
@@ -954,103 +735,7 @@ components:
         - type
         - provider
         - provider_account_id
-        - refresh_token
-        - access_token
         - expires_at
-        - id_token
-        - scope
-        - session_state
-        - token_type
-        - created_at
-        - updated_at
-
-    Users:
-      type: object
-      x-breu-entity: users
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-        name:
-          type: string
-        email:
-          type: string
-        email_verified:
-          type: string
-          format: date-time
-        image:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - name
-        - email
-        - email_verified
-        - image
-        - created_at
-        - updated_at
-
-    Sessions:
-      type: object
-      x-breu-entity: sessions
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-        user_id:
-          type: string
-          x-go-name: UserID
-        expires:
-          type: string
-          format: date-time
-        session_token:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - user_id
-        - expires
-        - session_token
-        - created_at
-
-    VerificationToken:
-      type: object
-      x-breu-entity: verification_token
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-        identifier:
-          type: string
-        token:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - identifier
-        - token
-        - expires
         - created_at
         - updated_at
 
@@ -1065,45 +750,30 @@ components:
         - name
         - email
 
-    LinkAccount:
+    LinkAccountRequest:
       type: object
       properties:
         user_id:
           type: string
+          format: uuid
           x-go-name: UserID
+          x-go-type: gocql.UUID
         type:
           type: string
         provider:
           type: string
         provider_account_id:
           type: string
-        refresh_token:
-          type: string
-        access_token:
-          type: string
+          x-go-name: ProviderAccountID
         expires_at:
           type: string
           format: date-time
-        id_token:
-          type: string
-        scope:
-          type: string
-        session_state:
-          type: string
-        token_type:
-          type: string
       required:
         - user_id
         - type
         - provider
         - provider_account_id
-        - refresh_token
-        - access_token
         - expires_at
-        - id_token
-        - scope
-        - session_state
-        - token_type
 
     DeleteResponse:
       type: object
@@ -1117,45 +787,3 @@ components:
       required:
         - ok
         - message
-
-    SessionRequest:
-      type: object
-      properties:
-        user_id:
-          type: string
-          x-go-name: UserID
-        expires:
-          type: string
-          format: date-time
-        session_token:
-          type: string
-      required:
-        - user_id
-        - expires
-        - session_token
-
-    UserAndSession:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/Users'
-        session:
-          $ref: '#/components/schemas/Sessions'
-      required:
-        - user
-        - session
-
-    VerificationTokenRequest:
-      type: object
-      properties:
-        identifier:
-          type: string
-        token:
-          type: string
-        expires:
-          type: string
-          format: date-time
-      required:
-        - identifier
-        - token
-        - expires
