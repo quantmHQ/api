@@ -16,18 +16,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterationRequest'
+              $ref: "#/components/schemas/RegisterationRequest"
       responses:
-        '201':
+        "201":
           description: User created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegisterationResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/RegisterationResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/login:
     post:
       summary: Login
@@ -40,20 +40,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LoginRequest'
+              $ref: "#/components/schemas/LoginRequest"
       responses:
-        '200':
+        "200":
           description: Login response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/TokenResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/api-keys/user:
     post:
       summary: Create a new API key for the user
@@ -66,22 +66,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAPIKeyRequest'
+              $ref: "#/components/schemas/CreateAPIKeyRequest"
       security:
         - BearerAuth: []
       responses:
-        '201':
+        "201":
           description: API key created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateAPIKeyResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/CreateAPIKeyResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/api-keys/team:
     post:
       summary: Create a new API key for the team
@@ -94,22 +94,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateAPIKeyRequest'
+              $ref: "#/components/schemas/CreateAPIKeyRequest"
       security:
         - BearerAuth: []
       responses:
-        '201':
+        "201":
           description: API key created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateAPIKeyResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/CreateAPIKeyResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/api-keys/validate:
     get:
       summary: Validate an API key
@@ -120,18 +120,18 @@ paths:
       security:
         - APIKeyAuth: []
       responses:
-        '200':
+        "200":
           description: API key validated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/APIKeyValidationResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/APIKeyValidationResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/teams:
     get:
       summary: List all teams the user is a member of
@@ -142,18 +142,18 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        '200':
+        "200":
           description: Teams retrieved
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamList'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/TeamList"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     post:
       summary: Create a new team
       description: Create a new team
@@ -165,22 +165,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTeamRequest'
+              $ref: "#/components/schemas/CreateTeamRequest"
       security:
         - BearerAuth: []
       responses:
-        '201':
+        "201":
           description: Team created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/teams/{slug}:
     get:
       summary: Get a team
@@ -198,20 +198,20 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        '200':
+        "200":
           description: Team retrieved
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Team'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Team"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/teams/{slug}/users:
     post:
@@ -232,24 +232,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddUserToTeamRequest'
+              $ref: "#/components/schemas/AddUserToTeamRequest"
       security:
         - BearerAuth: []
       responses:
-        '201':
+        "201":
           description: User added to team
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TeamUser'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/TeamUser"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/users:
     post:
@@ -263,20 +263,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserRequest'
+              $ref: "#/components/schemas/UserRequest"
       responses:
-        '201':
+        "201":
           description: User created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     get:
       summary: get users
       description: get user by provider and provider account id
@@ -303,22 +303,22 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: user list
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                  $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/users/{id}:
     get:
@@ -335,20 +335,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Get user by id
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     put:
       summary: update user by id
       description: update user by id
@@ -367,29 +367,28 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserRequest'
+              $ref: "#/components/schemas/UserRequest"
       responses:
-        '200':
+        "200":
           description: update user by id
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     delete:
       summary: delete user by id
       description: delete user by id
       operationId: delete-user
       tags:
         - auth
-        - user
       parameters:
         - name: id
           in: path
@@ -398,20 +397,20 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Delete user by id
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/DeleteResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/accounts/link:
     post:
@@ -425,20 +424,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LinkAccountRequest'
+              $ref: "#/components/schemas/LinkAccountRequest"
       responses:
-        '200':
+        "200":
           description: link user to account
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Account"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     delete:
       summary: unlink account
       description: unlink account
@@ -459,27 +458,27 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: unlink account
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/DeleteResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
 components:
   securitySchemes:
     BearerAuth:
-      $ref: '../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth'
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth"
     APIKeyAuth:
-      $ref: '../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth'
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
 
   schemas:
     RegisterationRequest:
@@ -513,9 +512,9 @@ components:
       type: object
       properties:
         user:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
         team:
-          $ref: '#/components/schemas/Team'
+          $ref: "#/components/schemas/Team"
 
     LoginRequest:
       type: object
@@ -606,7 +605,7 @@ components:
         teams:
           type: array
           items:
-            $ref: '#/components/schemas/Team'
+            $ref: "#/components/schemas/Team"
 
     User:
       type: object

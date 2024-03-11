@@ -20,18 +20,18 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BlueprintCreateRequest'
+              $ref: "#/components/schemas/BlueprintCreateRequest"
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Blueprint'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Blueprint"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/blueprints/{stack_id}:
     get:
@@ -53,20 +53,20 @@ paths:
             format: uuid
             x-go-type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Blueprint'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Blueprint"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/workloads:
     post:
@@ -83,20 +83,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WorkloadCreateRequest'
+              $ref: "#/components/schemas/WorkloadCreateRequest"
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workload'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Workload"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   # Enforce user to provide either of the two query parameters
   /core/workloads/:
@@ -125,20 +125,20 @@ paths:
             format: uuid
             x-go-type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
                 oneOf:
-                  - $ref: '#/components/schemas/Workload'
-                  - $ref: '#/components/schemas/WorkloadListResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                  - $ref: "#/components/schemas/Workload"
+                  - $ref: "#/components/schemas/WorkloadListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/resources:
     post:
@@ -155,20 +155,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ResourceCreateRequest'
+              $ref: "#/components/schemas/ResourceCreateRequest"
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Resource'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Resource"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/resources/{stack_id}:
     get:
@@ -190,20 +190,20 @@ paths:
             format: uuid
             x-go-type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceListResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/ResourceListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/stacks:
     post:
@@ -220,20 +220,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StackCreateRequest'
+              $ref: "#/components/schemas/StackCreateRequest"
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stack'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Stack"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
     get:
       summary: List stacks
@@ -245,18 +245,18 @@ paths:
       tags:
         - core
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StackListResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/StackListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/stacks/{slug}:
     get:
@@ -277,20 +277,20 @@ paths:
             type: string
             format: slug
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Stack'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Stack"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/repos:
     post:
@@ -307,20 +307,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RepoCreateRequest'
+              $ref: "#/components/schemas/RepoCreateRequest"
       responses:
-        '201':
+        "201":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Repo'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Repo"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
     get:
       summary: List Repos
@@ -332,18 +332,18 @@ paths:
       tags:
         - core
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RepoListResponse'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/RepoListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /core/repos/{id}:
     get:
@@ -365,27 +365,27 @@ paths:
             format: uuid
             x-go-type: string
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Repo'
-        '400':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/BadRequest'
-        '401':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/Unauthorized'
-        '404':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/NotFound'
-        '500':
-          $ref: '../../shared/v1/schema.yaml#/components/responses/InternalServerError'
+                $ref: "#/components/schemas/Repo"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
 components:
   securitySchemes:
     BearerAuth:
-      $ref: '../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth'
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth"
     APIKeyAuth:
-      $ref: '../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth'
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
 
   schemas:
     BlueprintCreateRequest:
@@ -403,7 +403,7 @@ components:
         provider_config:
           type: string
         regions:
-          $ref: '#/components/schemas/BluePrintRegions'
+          $ref: "#/components/schemas/BluePrintRegions"
       required:
         - name
         - stack_id
@@ -452,7 +452,7 @@ components:
     WorkloadListResponse:
       type: array
       items:
-        $ref: '#/components/schemas/Workload'
+        $ref: "#/components/schemas/Workload"
 
     ResourceCreateRequest:
       type: object
@@ -465,7 +465,7 @@ components:
           x-go-name: StackID
           x-go-type: gocql.UUID
         provider:
-          $ref: '#/components/schemas/CloudProvider'
+          $ref: "#/components/schemas/CloudProvider"
         driver:
           type: string
         immutable:
@@ -483,7 +483,7 @@ components:
     ResourceListResponse:
       type: array
       items:
-        $ref: '#/components/schemas/Resource'
+        $ref: "#/components/schemas/Resource"
 
     StackCreateRequest:
       type: object
@@ -491,7 +491,7 @@ components:
         name:
           type: string
         config:
-          $ref: '#/components/schemas/StackConfig'
+          $ref: "#/components/schemas/StackConfig"
       required:
         - name
         - config
@@ -499,7 +499,7 @@ components:
     StackListResponse:
       type: array
       items:
-        $ref: '#/components/schemas/Stack'
+        $ref: "#/components/schemas/Stack"
 
     RepoCreateRequest:
       type: object
@@ -512,7 +512,7 @@ components:
           x-go-name: StackID
           x-go-type: gocql.UUID
         provider:
-          $ref: '#/components/schemas/RepoProvider'
+          $ref: "#/components/schemas/RepoProvider"
         provider_id:
           type: string
           x-go-name: ProviderID
@@ -531,12 +531,12 @@ components:
     RepoListResponse:
       type: array
       items:
-        $ref: '#/components/schemas/Repo'
+        $ref: "#/components/schemas/Repo"
 
     Blueprint:
       type: object
       x-breu-entity: blueprints
-      description: 'Blueprint contains a collection of Workload & Resource to define one single release'
+      description: "Blueprint contains a collection of Workload & Resource to define one single release"
       properties:
         id:
           type: string
@@ -553,7 +553,7 @@ components:
           x-go-name: StackID
           x-go-type: gocql.UUID
         regions:
-          $ref: '#/components/schemas/BluePrintRegions'
+          $ref: "#/components/schemas/BluePrintRegions"
         rollout_budget:
           type: string
         created_at:
@@ -575,7 +575,7 @@ components:
     Workload:
       type: object
       x-breu-entity: workloads
-      description: 'Workload defines a workload for the app'
+      description: "Workload defines a workload for the app"
       properties:
         id:
           type: string
@@ -603,13 +603,13 @@ components:
           type: string
         kind:
           type: string
-          description: 'Default, worker, job, cronjob'
+          description: "Default, worker, job, cronjob"
         container:
           type: string
-          description: 'json with keys: image, command, environment, dependencies'
+          description: "json with keys: image, command, environment, dependencies"
         builder:
           type: string
-          description: 'json with keys: buildpack, dockerfile, script, external'
+          description: "json with keys: buildpack, dockerfile, script, external"
         created_at:
           type: string
           format: date-time
@@ -632,7 +632,7 @@ components:
     Resource:
       type: object
       x-breu-entity: resources
-      description: 'Resource defines the cloud provider resources for the app e.g. s3, sqs, etc'
+      description: "Resource defines the cloud provider resources for the app e.g. s3, sqs, etc"
       properties:
         id:
           type: string
@@ -648,13 +648,13 @@ components:
           x-go-type: gocql.UUID
         config:
           type: string
-          description: 'resource configruation e.g properties, output environment variables etc'
+          description: "resource configruation e.g properties, output environment variables etc"
         driver:
-          $ref: '#/components/schemas/Driver'
+          $ref: "#/components/schemas/Driver"
         is_immutable:
           type: boolean
         provider:
-          $ref: '#/components/schemas/CloudProvider'
+          $ref: "#/components/schemas/CloudProvider"
         created_at:
           type: string
           format: date-time
@@ -695,7 +695,7 @@ components:
           type: string
           format: slug
         config:
-          $ref: '#/components/schemas/StackConfig'
+          $ref: "#/components/schemas/StackConfig"
         created_at:
           type: string
           format: date-time
@@ -732,7 +732,7 @@ components:
           x-go-name: StackID
           x-go-type: gocql.UUID
         provider:
-          $ref: '#/components/schemas/RepoProvider'
+          $ref: "#/components/schemas/RepoProvider"
         provider_id:
           type: string
           x-go-name: ProviderID
@@ -766,7 +766,7 @@ components:
 
     CloudProvider:
       type: string
-      description: 'aws, gcp, azure'
+      description: "aws, gcp, azure"
       enum:
         - AWS
         - GCP
@@ -821,7 +821,7 @@ components:
 
     GCPDriver:
       type: string
-      description: 'gke, cloudrun, pubsub etc'
+      description: "gke, cloudrun, pubsub etc"
       enum:
         - gke
         - cloudrun
@@ -829,7 +829,7 @@ components:
 
     AWSDriver:
       type: string
-      description: 's3, sqs, sns, dynamodb, postgres, mysql etc'
+      description: "s3, sqs, sns, dynamodb, postgres, mysql etc"
       enum:
         - s3
         - sns
@@ -837,7 +837,7 @@ components:
 
     Driver:
       type: string
-      description: 'gke, cloudrun, pubsub, s3, sqs, sns, dynamodb, postgres, mysql etc'
+      description: "gke, cloudrun, pubsub, s3, sqs, sns, dynamodb, postgres, mysql etc"
       enum:
         - gke
         - cloudrun
