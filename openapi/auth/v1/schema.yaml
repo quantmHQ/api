@@ -713,7 +713,7 @@ components:
           x-go-name: UserID
           x-go-type: gocql.UUID
         type:
-          type: string
+          $ref: "#/components/schemas/AccountTypeEnum"
         provider:
           type: string
         provider_account_id:
@@ -758,7 +758,7 @@ components:
           x-go-name: UserID
           x-go-type: gocql.UUID
         type:
-          type: string
+          $ref: "#/components/schemas/AccountTypeEnum"
         provider:
           type: string
         provider_account_id:
@@ -786,3 +786,12 @@ components:
       required:
         - ok
         - message
+
+    AccountTypeEnum:
+      type: string
+      description: oauth account type enum
+      enum:
+        - oidc
+        - oauth
+        - email
+        - webauthn
