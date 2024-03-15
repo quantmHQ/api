@@ -595,9 +595,6 @@ components:
           type: string
           x-oapi-codegen-extra-tags:
             validate: required
-        slug:
-          type: string
-          format: slug
 
     TeamList:
       type: object
