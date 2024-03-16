@@ -594,7 +594,9 @@ components:
         name:
           type: string
           x-oapi-codegen-extra-tags:
-            validate: required
+            validate: 
+      required:
+        - name
 
     TeamList:
       type: object
