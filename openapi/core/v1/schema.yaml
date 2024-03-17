@@ -536,6 +536,7 @@ components:
     Blueprint:
       type: object
       x-breu-entity: blueprints
+      x-breu-entity-type: cql
       description: "Blueprint contains a collection of Workload & Resource to define one single release"
       properties:
         id:
@@ -575,6 +576,7 @@ components:
     Workload:
       type: object
       x-breu-entity: workloads
+      x-breu-entity-type: cql
       description: "Workload defines a workload for the app"
       properties:
         id:
@@ -632,6 +634,7 @@ components:
     Resource:
       type: object
       x-breu-entity: resources
+      x-breu-entity-type: cql
       description: "Resource defines the cloud provider resources for the app e.g. s3, sqs, etc"
       properties:
         id:
@@ -676,6 +679,7 @@ components:
     Stack:
       type: object
       x-breu-entity: stacks
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
@@ -718,6 +722,7 @@ components:
     Repo:
       type: object
       x-breu-entity: repos
+      x-breu-entity-type: cql
       properties:
         name:
           type: string

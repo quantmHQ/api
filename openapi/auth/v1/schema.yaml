@@ -562,6 +562,7 @@ components:
     Team:
       type: object
       x-breu-entity: teams
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
@@ -609,6 +610,7 @@ components:
     User:
       type: object
       x-breu-entity: users
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
@@ -668,6 +670,7 @@ components:
     TeamUser:
       type: object
       x-breu-entity: team_users
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
@@ -700,6 +703,7 @@ components:
     Account:
       type: object
       x-breu-entity: oauth_accounts
+      x-breu-entity-type: cql
       properties:
         id:
           type: string

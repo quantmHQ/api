@@ -200,6 +200,7 @@ components:
       type: object
       x-go-name: Repo
       x-breu-entity: github_repos
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
@@ -242,6 +243,7 @@ components:
     ArtifactReadyRequest:
       type: object
       x-breu-entity: github_artifact
+      x-breu-entity-type: cql
       properties:
         pull_request_id:
           type: string
@@ -270,6 +272,7 @@ components:
       type: object
       x-go-name: Installation
       x-breu-entity: github_installations
+      x-breu-entity-type: cql
       properties:
         id:
           type: string
