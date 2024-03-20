@@ -777,6 +777,11 @@ components:
         - GCP
         - Azure
 
+    MessagingProvider:
+      type: string
+      enum:
+        - slack
+
     BluePrintRegions:
       type: object
       description: BluePrintRegions sets the cloud regions where a blueprint can be deployed
