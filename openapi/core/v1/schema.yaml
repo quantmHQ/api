@@ -750,7 +750,7 @@ components:
         channelID:
           type: string
         message:
-          $ref: "#/components/schemas/MessagingProvider"
+          $ref: "#/components/schemas/MessageProvider"
       required:
         - channelID
         - message
@@ -813,7 +813,7 @@ components:
         - GCP
         - Azure
 
-    MessagingProvider:
+    MessageProvider:
       type: string
       enum:
         - slack
