@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: quantm events
+  version: 0.0.1
+
+paths:
+  /event:
+    post:
+      summary: Create test quantm event
+      description: Create test quantm event
+      operationId: create-quantm-event
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - event
+      requestBody:
+        description: event
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventCreateRequest"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Events"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth"
+    APIKeyAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
+
+  schemas:
+    Events:
+      type: object
+      x-breu-entity: events
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        level:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        provider:
+          $ref: "#/components/schemas/Provider"
+        provider_type:
+          type: string
+        metadata:
+          $ref: "#/components/schemas/MetaData"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - level
+        - name
+        - type
+        - provider
+        - provider_type
+        - metadata
+        - created_at
+        - updated_at
+
+    Provider:
+      type: string
+
+    MetaData:
+      type: object
+      additionalProperties:
+        type: string
+
+    EventCreateRequest:
+      type: object
+      properties:
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        level:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        provider:
+          $ref: "#/components/schemas/Provider"
+        provider_type:
+          type: string
+        metadata:
+          $ref: "#/components/schemas/MetaData"
+      required:
+        - team_id
+        - level
+        - name
+        - type
+        - provider
+        - provider_type
+        - metadata
