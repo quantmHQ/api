@@ -8,7 +8,7 @@ paths:
     get:
       summary: Initiate slack login
       description: Slack
-      operationId: login
+      operationId: slack-login
       tags:
         - slack
       responses:

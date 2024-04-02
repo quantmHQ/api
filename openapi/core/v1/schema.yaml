@@ -386,7 +386,7 @@ paths:
       description: early warning messgae
       operationId: slack-notify
       tags:
-        - slack
+        - core
       requestBody:
         description: message
         content:
