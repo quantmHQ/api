@@ -54,9 +54,9 @@ components:
         workspace_name:
           type: string
           x-go-name: WorkspaceName
-        bot_token:
+        workspace_bot_token:
           type: string
-          x-go-name: BotToken
+          x-go-name: WorkspaceBotToken
         team_id:
           type: string
           format: uuid
@@ -74,7 +74,7 @@ components:
         - channel_name
         - workspace_id
         - workspace_name
-        - bot_token
+        - workspace_bot_token
         - team_id
         - created_at
         - updated_at
