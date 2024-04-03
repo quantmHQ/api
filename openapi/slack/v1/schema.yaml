@@ -4,21 +4,6 @@ info:
   version: 0.0.1
 
 paths:
-  /v1/auth/slack/login:
-    get:
-      summary: Initiate slack login
-      description: Slack
-      operationId: slack-login
-      tags:
-        - slack
-      responses:
-        "302":
-          description: Redirects to slack login
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /v1/auth/slack/login/callback:
     get:
       summary: Callback after Slack login
