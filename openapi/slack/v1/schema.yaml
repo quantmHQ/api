@@ -4,12 +4,11 @@ info:
   version: 0.0.1
 
 paths:
-  /v1/auth/slack/login/callback:
+  /v1/slack:
     get:
-      summary: Callback after Slack login
-      description: Slack Oauth Redirect
+      summary: Slack Oauth and save the info
+      description: Slack Oauth and save the info
       operationId: slack-oauth
-
       tags:
         - slack
       parameters:
@@ -24,7 +23,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SlackResponse"
+                $ref: "#/components/schemas/Slack"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "500":
@@ -32,21 +31,50 @@ paths:
 
 components:
   schemas:
-    SlackResponse:
+    Slack:
       type: object
+      x-go-name: Slack
+      x-breu-entity: slack
+      x-breu-entity-type: cql
       properties:
-        status:
-          $ref: "#/components/schemas/SlackStatus"
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+        channel_id:
+          type: string
+          x-go-name: ChannelID
+        channel_name:
+          type: string
+          x-go-name: ChannelName
+        workspace_id:
+          type: string
+          x-go-name: WorkspaceID
+        workspace_name:
+          type: string
+          x-go-name: WorkspaceName
+        bot_token:
+          type: string
+          x-go-name: BotToken
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
       required:
-        - status
-
-    SlackStatus:
-      type: string
-      enum:
-        - Ok
-        - Error
+        - id
+        - channel_id
+        - channel_name
+        - workspace_id
+        - workspace_name
+        - bot_token
+        - team_id
+        - created_at
+        - updated_at
