@@ -380,31 +380,6 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
-  /v1/slack/notify:
-    post:
-      summary: early warning messgae
-      description: early warning messgae
-      operationId: slack-notify
-      tags:
-        - core
-      requestBody:
-        description: message
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SlackMessage"
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SlackMessage"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
 components:
   securitySchemes:
     BearerAuth:
