@@ -719,17 +719,6 @@ components:
       type: object
       additionalProperties: true
 
-    SlackMessage:
-      type: object
-      properties:
-        channelID:
-          type: string
-        message:
-          $ref: "#/components/schemas/MessageProvider"
-      required:
-        - channelID
-        - message
-
     Repo:
       type: object
       x-breu-entity: repos

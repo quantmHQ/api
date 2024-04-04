@@ -349,68 +349,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-    put:
-      summary: update user by id
-      description: update user by id
-      operationId: update-user
-      tags:
-        - auth
-      parameters:
-        - name: id
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: string
-      requestBody:
-        description: User to update
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UserRequest"
-      responses:
-        "200":
-          description: update user by id
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-    delete:
-      summary: delete user by id
-      description: delete user by id
-      operationId: delete-user
-      tags:
-        - auth
-      parameters:
-        - name: id
-          in: path
-          description: user id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Delete user by id
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteResponse"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/accounts/link:
     post:
@@ -436,40 +374,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-    delete:
-      summary: unlink account
-      description: unlink account
-      operationId: unlink-account
-      tags:
-        - auth
-      parameters:
-        - name: provider_account_id
-          in: query
-          description: Provider account ID
-          required: true
-          schema:
-            type: string
-        - name: provider
-          in: query
-          description: Provider type
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          description: unlink account
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteResponse"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
@@ -595,7 +499,7 @@ components:
         name:
           type: string
           x-oapi-codegen-extra-tags:
-            validate: 
+            validate:
       required:
         - name
 
@@ -776,19 +680,6 @@ components:
         - provider
         - provider_account_id
         - expires_at
-
-    DeleteResponse:
-      type: object
-      properties:
-        ok:
-          type: boolean
-          description: Indicates if the operation was successful.
-        message:
-          type: string
-          description: A descriptive message about the operation result.
-      required:
-        - ok
-        - message
 
     AccountTypeEnum:
       type: string
