@@ -11,6 +11,8 @@ paths:
       operationId: slack-oauth
       tags:
         - slack
+      security:
+        - BearerAuth: []
       parameters:
         - in: query
           name: code
@@ -30,6 +32,12 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
 components:
+  securitySchemes:
+    BearerAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth"
+    APIKeyAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
+
   schemas:
     Slack:
       type: object
