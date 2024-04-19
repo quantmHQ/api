@@ -861,3 +861,31 @@ components:
         - s3
         - sns
         - sqs
+
+    BranchChanges:
+      type: object
+      description: Branch changes
+      properties:
+        changes:
+          type: integer
+          description: Total number of changes
+        additions:
+          type: integer
+          description: Number of additions
+        deletions:
+          type: integer
+          description: Number of deletions
+        file_count:
+          type: integer
+          description: Number of changed files
+        files:
+          type: array
+          items:
+            type: string
+          description: List of changed files
+      required:
+        - changes
+        - additions
+        - deletions
+        - file_count
+        - files
