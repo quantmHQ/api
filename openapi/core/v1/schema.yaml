@@ -899,7 +899,7 @@ components:
         - file_count
         - files
 
-    GetLatestCommit:
+    LatestCommit:
       type: object
       description: get the latest commit information
       properties:
