@@ -864,8 +864,11 @@ components:
 
     BranchChanges:
       type: object
-      description: Branch changes
+      description: Branch changes lines exceed
       properties:
+        repo_url: 
+          type: string
+          description: Repo url
         changes:
           type: integer
           description: Total number of changes
@@ -875,6 +878,9 @@ components:
         deletions:
           type: integer
           description: Number of deletions
+        compare_url:
+          type: string
+          description: Compare url 
         file_count:
           type: integer
           description: Number of changed files
@@ -883,9 +889,27 @@ components:
           items:
             type: string
           description: List of changed files
+
       required:
+        - repo_url
         - changes
         - additions
         - deletions
+        - compare_url
         - file_count
         - files
+
+    StaleBranch:
+      type: object
+      description: Stale branch information
+      properties:
+        repo_url: 
+          type: string
+        branch:
+          type: string
+        sha:
+          type: string
+      required:
+        - repo_url
+        - sha
+        - url
