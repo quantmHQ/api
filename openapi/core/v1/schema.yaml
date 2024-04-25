@@ -912,4 +912,4 @@ components:
       required:
         - repo_url
         - sha
-        - url
+        - branch
