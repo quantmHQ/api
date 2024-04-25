@@ -903,6 +903,8 @@ components:
       type: object
       description: Stale branch information
       properties:
+        repo_name: 
+          type: string
         repo_url: 
           type: string
         branch:
@@ -910,7 +912,11 @@ components:
         sha:
           type: string
           x-go-name: SHA
+        commit_url:
+          type: string
       required:
+        - repo_name
         - repo_url
         - branch
         - sha
+        - commit_url
