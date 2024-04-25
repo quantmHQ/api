@@ -909,7 +909,8 @@ components:
           type: string
         sha:
           type: string
+          x-go-name: SHA
       required:
         - repo_url
-        - sha
         - branch
+        - sha
