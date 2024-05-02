@@ -54,6 +54,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         level:
           type: string
         name:
@@ -100,6 +101,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         level:
           type: string
         name:

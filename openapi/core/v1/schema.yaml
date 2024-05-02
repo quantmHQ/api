@@ -691,6 +691,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         name:
           type: string
           x-oapi-codegen-extra-tags:
@@ -736,6 +737,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         stack_id:
           type: string
           format: uuid

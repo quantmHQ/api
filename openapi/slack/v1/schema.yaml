@@ -70,6 +70,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
+          x-entity-part-key: true  # cassandra part key
         created_at:
           type: string
           format: date-time
