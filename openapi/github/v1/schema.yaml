@@ -402,6 +402,7 @@ components:
         - install
         - update
         - delete
+        - request
 
     OCIImageRegistry:
       type: string
