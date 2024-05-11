@@ -75,17 +75,13 @@ paths:
               $ref: "#/components/schemas/CompleteInstallationRequest"
       responses:
         "200":
-          description: GitHub App installation completed
+          description: GitHub repositories
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/WorkflowResponse"
-        "201":
-          description: GitHub App installation completed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/WorkflowResponse"
+                type: array
+                items:
+                  $ref: "#/components/schemas/GithubRepo"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
