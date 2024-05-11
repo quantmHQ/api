@@ -9,6 +9,12 @@ paths:
       summary: Receive result from github action CICD
       description: Receive result from github action CICD
       operationId: github-action-result
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - providers
+        - github
       requestBody:
         description: Github action result
         content:
@@ -170,6 +176,12 @@ paths:
       summary: Receive git merge command from quantm cli
       description: Receive git merge command from quantm cli
       operationId: cli-git-merge
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - providers
+        - github
       requestBody:
         description: github repo and branch
         content:
@@ -181,27 +193,6 @@ paths:
           description: OK
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  # /providers/github/events/state:
-  #   post:
-  #     summary: quantm state based on github events
-  #     description: quantm state based on github events
-  #     operationId: github-events-state
-  #     requestBody:
-  #       description: github events state
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "#/components/schemas/GithubEventsState"
-  #     responses:
-  #       "200":
-  #         description: OK
-  #       "400":
-  #         $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-  #       "401":
-  #         $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-  #       "500":
-  #         $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
 components:
   securitySchemes:
