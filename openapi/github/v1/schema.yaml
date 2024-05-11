@@ -7,16 +7,8 @@ paths:
   /providers/github/cicd-result:
     post:
       summary: Receive result from github action CICD
-      description: |
-        Receive result from github action CICD
-        TODO: Implement Security
+      description: Receive result from github action CICD
       operationId: github-action-result
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - providers
-        - github
       requestBody:
         description: Github action result
         content:
@@ -34,10 +26,8 @@ paths:
       summary: Webhook reciever for github
       description: |
         Webhook reciever for github.
+        TODO: implement openapi generator.
       operationId: github-webhook
-      tags:
-        - providers
-        - github
       responses:
         "200":
           description: OK
@@ -74,14 +64,12 @@ paths:
             schema:
               $ref: "#/components/schemas/CompleteInstallationRequest"
       responses:
-        "200":
-          description: GitHub repositories
+        "201":
+          description: GitHub App installation completed
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GithubRepo"
+                $ref: "#/components/schemas/WorkflowResponse"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -180,15 +168,8 @@ paths:
   /providers/github/cli-git-merge:
     post:
       summary: Receive git merge command from quantm cli
-      description: |
-        Receive git merge command from quantm cli
+      description: Receive git merge command from quantm cli
       operationId: cli-git-merge
-      security:
-        - APIKeyAuth: []
-      tags:
-        - providers
-        - github
-        - cli
       requestBody:
         description: github repo and branch
         content:
@@ -200,6 +181,27 @@ paths:
           description: OK
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  # /providers/github/events/state:
+  #   post:
+  #     summary: quantm state based on github events
+  #     description: quantm state based on github events
+  #     operationId: github-events-state
+  #     requestBody:
+  #       description: github events state
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/GithubEventsState"
+  #     responses:
+  #       "200":
+  #         description: OK
+  #       "400":
+  #         $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+  #       "401":
+  #         $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+  #       "500":
+  #         $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
 components:
   securitySchemes:
@@ -237,6 +239,12 @@ components:
           type: string
         full_name:
           type: string
+        default_branch:
+          type: string
+        has_early_warning:
+          type: boolean
+        is_active:
+          type: boolean
         created_at:
           type: string
           format: date-time
@@ -250,6 +258,9 @@ components:
         - installation_id
         - name
         - full_name
+        - default_branch
+        - has_early_warning
+        - is_active
         - created_at
         - updated_at
 
@@ -394,7 +405,6 @@ components:
         - install
         - update
         - delete
-        - request
 
     OCIImageRegistry:
       type: string
