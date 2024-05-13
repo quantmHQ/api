@@ -811,6 +811,11 @@ components:
         workspace_name:
           type: string
           x-go-name: WorkspaceName
+      required:
+        - channel_id
+        - channel_name
+        - workspace_id
+        - workspace_name
 
     BluePrintRegions:
       type: object
