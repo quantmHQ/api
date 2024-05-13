@@ -752,6 +752,12 @@ components:
           type: string
         is_monorepo:
           type: boolean
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_id:
+          type: string
+        message_provider_data:
+          $ref: "#/components/schemas/MessageProviderData"
         created_at:
           type: string
           format: date-time
@@ -789,6 +795,22 @@ components:
       type: string
       enum:
         - slack
+
+    MessageProviderData:
+      type: object
+      properties:
+        channel_id:
+          type: string
+          x-go-name: ChannelID
+        channel_name:
+          type: string
+          x-go-name: ChannelName
+        workspace_id:
+          type: string
+          x-go-name: WorkspaceID
+        workspace_name:
+          type: string
+          x-go-name: WorkspaceName
 
     BluePrintRegions:
       type: object
@@ -868,7 +890,7 @@ components:
       type: object
       description: Branch changes lines exceed
       properties:
-        repo_url: 
+        repo_url:
           type: string
           description: Repo url
         changes:
@@ -882,7 +904,7 @@ components:
           description: Number of deletions
         compare_url:
           type: string
-          description: Compare url 
+          description: Compare url
         file_count:
           type: integer
           description: Number of changed files
@@ -905,9 +927,9 @@ components:
       type: object
       description: get the latest commit information
       properties:
-        repo_name: 
+        repo_name:
           type: string
-        repo_url: 
+        repo_url:
           type: string
         branch:
           type: string
