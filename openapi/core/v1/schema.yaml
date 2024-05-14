@@ -754,8 +754,6 @@ components:
           type: boolean
         message_provider:
           $ref: "#/components/schemas/MessageProvider"
-        message_provider_id:
-          type: string
         message_provider_data:
           $ref: "#/components/schemas/MessageProviderData"
         created_at:
@@ -773,6 +771,8 @@ components:
         - provider_id
         - default_branch
         - is_monorepo
+        - message_provider
+        - message_provider_data
         - created_at
         - updated_at
 
@@ -794,28 +794,36 @@ components:
     MessageProvider:
       type: string
       enum:
+        - none
         - slack
 
     MessageProviderData:
       type: object
       properties:
+        slack:
+          $ref: "#/components/schemas/MessageProviderSlackData"
+
+    MessageProviderSlackData:
+      type: object
+      properties:
+        bot_token:
+          type: string
         channel_id:
           type: string
           x-go-name: ChannelID
         channel_name:
           type: string
-          x-go-name: ChannelName
         workspace_id:
           type: string
           x-go-name: WorkspaceID
         workspace_name:
           type: string
-          x-go-name: WorkspaceName
       required:
+        - bot_token
         - channel_id
         - channel_name
         - workspace_id
-        - workspace_name
+        - workspace_name      
 
     BluePrintRegions:
       type: object
