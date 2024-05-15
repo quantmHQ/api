@@ -504,29 +504,20 @@ components:
     RepoCreateRequest:
       type: object
       properties:
-        name:
-          type: string
-        stack_id:
-          type: string
-          format: uuid
-          x-go-name: StackID
-          x-go-type: gocql.UUID
         provider:
           $ref: "#/components/schemas/RepoProvider"
         provider_id:
           type: string
           x-go-name: ProviderID
-        default_branch:
-          type: string
         is_monorepo:
           type: boolean
+        code:
+          type: string
       required:
-        - name
-        - stack_id
         - provider
         - provider_id
-        - default_branch
         - is_monorepo
+        - code
 
     RepoListResponse:
       type: array
