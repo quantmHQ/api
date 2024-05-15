@@ -767,6 +767,17 @@ components:
         - created_at
         - updated_at
 
+    RepoProviderData:
+      type: object
+      properties:
+        name:
+          type: string
+        default_branch:
+          type: string
+      required:
+        - name
+        - default_branch
+
     RepoProvider:
       type: string
       enum:
@@ -814,7 +825,7 @@ components:
         - channel_id
         - channel_name
         - workspace_id
-        - workspace_name      
+        - workspace_name
 
     BluePrintRegions:
       type: object
