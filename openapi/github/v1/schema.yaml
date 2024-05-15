@@ -216,6 +216,7 @@ components:
           type: integer
           format: int64
           x-go-name: GithubID
+          x-go-type: shared.Int64
         team_id:
           type: string
           format: uuid
@@ -226,6 +227,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
+          x-go-type: shared.Int64
         name:
           type: string
         full_name:
@@ -302,6 +304,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
+          x-go-type: shared.Int64
           x-oapi-codegen-extra-tags:
             validate: required,db_unique
         installation_login:
@@ -312,6 +315,7 @@ components:
           type: integer
           format: int64
           x-go-name: SenderID
+          x-go-type: shared.Int64
         sender_login:
           type: string
         status:
@@ -384,6 +388,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
+          x-go-type: shared.Int64
         setup_action:
           $ref: "#/components/schemas/SetupAction"
       required:
@@ -452,10 +457,12 @@ components:
           type: integer
           format: int64
           x-go-name: GithubWorkflowID
+          x-go-type: shared.Int64
         github_workflow_run_id:
           type: integer
           format: int64
           x-go-name: GithubWorkflowRunID
+          x-go-type: shared.Int64
         repo_name:
           type: string
           x-go-name: RepoName
