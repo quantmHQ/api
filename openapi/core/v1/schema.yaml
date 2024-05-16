@@ -513,10 +513,13 @@ components:
           type: boolean
         code:
           type: string
+        threshold:
+          type: integer
       required:
         - provider
         - provider_id
         - is_monorepo
+        - threshold
         - code
 
     RepoListResponse:
@@ -747,6 +750,8 @@ components:
           $ref: "#/components/schemas/MessageProvider"
         message_provider_data:
           $ref: "#/components/schemas/MessageProviderData"
+        threshold:
+          type: integer
         created_at:
           type: string
           format: date-time
@@ -764,6 +769,7 @@ components:
         - is_monorepo
         - message_provider
         - message_provider_data
+        - threshold
         - created_at
         - updated_at
 
