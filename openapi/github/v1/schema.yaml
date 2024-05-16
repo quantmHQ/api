@@ -228,6 +228,7 @@ components:
           format: int64
           x-go-name: InstallationID
           x-go-type: shared.Int64
+          x-entity-part-key: true # cassandra part key
         name:
           type: string
         full_name:
