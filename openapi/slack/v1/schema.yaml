@@ -25,7 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Slack"
+                $ref: "#/components/schemas/MessageProviderSlackData"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "500":
@@ -70,7 +70,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
-          x-entity-part-key: true  # cassandra part key
+          x-entity-part-key: true # cassandra part key
         created_at:
           type: string
           format: date-time
@@ -87,3 +87,25 @@ components:
         - team_id
         - created_at
         - updated_at
+
+    MessageProviderSlackData:
+      type: object
+      properties:
+        bot_token:
+          type: string
+        channel_id:
+          type: string
+          x-go-name: ChannelID
+        channel_name:
+          type: string
+        workspace_id:
+          type: string
+          x-go-name: WorkspaceID
+        workspace_name:
+          type: string
+      required:
+        - bot_token
+        - channel_id
+        - channel_name
+        - workspace_id
+        - workspace_name
