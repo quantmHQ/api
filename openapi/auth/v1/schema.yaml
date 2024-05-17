@@ -473,6 +473,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         name:
           type: string
           x-oapi-codegen-extra-tags:
@@ -521,12 +522,12 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         team_id:
           type: string
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
         email:
           type: string
           format: email
@@ -615,6 +616,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         user_id:
           type: string
           format: uuid
