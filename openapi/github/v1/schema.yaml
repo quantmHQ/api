@@ -483,3 +483,35 @@ components:
         - repo_name
         - created_at
         - updated_at
+
+    GithubOrgMembers:
+      type: object
+      x-go-name: GithubOrgMembers
+      x-breu-entity: github_org_members
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        name:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - name
+        - email
+        - company
+        - created_at
+        - updated_at
