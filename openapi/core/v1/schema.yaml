@@ -511,8 +511,10 @@ components:
           x-go-name: ProviderID
         is_monorepo:
           type: boolean
-        code:
-          type: string
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_data:
+          $ref: "#/components/schemas/MessageProviderData"
         threshold:
           type: integer
       required:
@@ -520,7 +522,8 @@ components:
         - provider_id
         - is_monorepo
         - threshold
-        - code
+        - message_provider
+        - message_provider_data
 
     RepoListResponse:
       type: array
