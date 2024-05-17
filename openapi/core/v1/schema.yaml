@@ -541,6 +541,13 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true
         name:
           type: string
         provider_config:
@@ -564,6 +571,7 @@ components:
         - id
         - name
         - stack_id
+        - team_id
         - regions
         - rollout_budget
         - provider_config
@@ -581,8 +589,26 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         name:
           type: string
+        repo_path:
+          type: string
+        kind:
+          type: string
+          description: "Default, worker, job, cronjob"
+        container:
+          type: string
+          description: "json with keys: image, command, environment, dependencies"
+        builder:
+          type: string
+          description: "json with keys: buildpack, dockerfile, script, external"
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true
         stack_id:
           type: string
           format: uuid
@@ -597,18 +623,7 @@ components:
           type: string
           format: uuid
           x-go-name: ResourceID
-          x-go-type: gocql.UUID
-        repo_path:
-          type: string
-        kind:
-          type: string
-          description: "Default, worker, job, cronjob"
-        container:
-          type: string
-          description: "json with keys: image, command, environment, dependencies"
-        builder:
-          type: string
-          description: "json with keys: buildpack, dockerfile, script, external"
+          x-go-type: gocql.UUID        
         created_at:
           type: string
           format: date-time
@@ -618,6 +633,7 @@ components:
       required:
         - id
         - name
+        - team_id
         - stack_id
         - repo_id
         - repo_path
@@ -639,13 +655,9 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         name:
           type: string
-        stack_id:
-          type: string
-          format: uuid
-          x-go-name: StackID
-          x-go-type: gocql.UUID
         config:
           type: string
           description: "resource configruation e.g properties, output environment variables etc"
@@ -655,6 +667,17 @@ components:
           type: boolean
         provider:
           $ref: "#/components/schemas/CloudProvider"
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true
+        stack_id:
+          type: string
+          format: uuid
+          x-go-name: StackID
+          x-go-type: gocql.UUID
         created_at:
           type: string
           format: date-time
@@ -665,7 +688,7 @@ components:
         - id
         - name
         - stack_id
-        - repo_id
+        - team_id
         - driver
         - provider
         - config
@@ -683,6 +706,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         team_id:
           type: string
           format: uuid
@@ -729,6 +753,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true
         team_id:
           type: string
           format: uuid
