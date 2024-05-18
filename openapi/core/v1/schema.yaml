@@ -504,22 +504,25 @@ components:
     RepoCreateRequest:
       type: object
       properties:
-        provider:
-          $ref: "#/components/schemas/RepoProvider"
-        provider_id:
+        ctrl_id:
           type: string
-          x-go-name: ProviderID
+          format: uuid
+          x-go-name: CtrlID
+          x-go-type: gocql.UUID
         is_monorepo:
           type: boolean
+        threshold:
+          type: integer
+        provider:
+          $ref: "#/components/schemas/RepoProvider"
         message_provider:
           $ref: "#/components/schemas/MessageProvider"
         message_provider_data:
           $ref: "#/components/schemas/MessageProviderData"
-        threshold:
-          type: integer
       required:
         - provider
         - provider_id
+        - ctrl_id
         - is_monorepo
         - threshold
         - message_provider
@@ -770,6 +773,16 @@ components:
         provider_id:
           type: string
           x-go-name: ProviderID
+        ctrl_id:
+          description: |
+            references the id field of the repos tables against the provider. For us, this means, that it will be the id field for
+              - github_repos
+              - gitlab_repos
+            etc.
+          type: string
+          format: uuid
+          x-go-name: CtrlID
+          x-go-type: gocql.UUID
         default_branch:
           type: string
         is_monorepo:
@@ -793,6 +806,7 @@ components:
         - stack_id
         - provider
         - provider_id
+        - ctrl_id
         - default_branch
         - is_monorepo
         - message_provider
