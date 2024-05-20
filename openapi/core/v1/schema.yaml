@@ -513,6 +513,8 @@ components:
           type: boolean
         threshold:
           type: integer
+          format: int64
+          x-go-type: shared.Int64
         provider:
           $ref: "#/components/schemas/RepoProvider"
         message_provider:
@@ -626,7 +628,7 @@ components:
           type: string
           format: uuid
           x-go-name: ResourceID
-          x-go-type: gocql.UUID        
+          x-go-type: gocql.UUID
         created_at:
           type: string
           format: date-time
@@ -793,6 +795,8 @@ components:
           $ref: "#/components/schemas/MessageProviderData"
         threshold:
           type: integer
+          format: int64
+          x-go-type: shared.Int64
         created_at:
           type: string
           format: date-time
