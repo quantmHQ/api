@@ -4,29 +4,6 @@ info:
   version: 0.0.1
 
 paths:
-  /providers/github/cicd-result:
-    post:
-      summary: Receive result from github action CICD
-      description: Receive result from github action CICD
-      operationId: github-action-result
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - providers
-        - github
-      requestBody:
-        description: Github action result
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GithubActionResultRequest"
-      responses:
-        "200":
-          description: OK
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /providers/github/webhook:
     post:
       summary: Webhook reciever for github
@@ -51,6 +28,25 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /providers/github/user-orgs:
+    post:
+      summary: associate an orgnanization for the user.
+      description: |
+        During GitHub signup, we'll identify users who belong to organizations with the Quanm app installed. This information will 
+        personalize the welcome page and help us tailor future onboarding use cases.
+      operationId:
+        - github-org-user-assoications
+      responses:
+        "201":
+          description: Create Association
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int64
 
   /providers/github/complete-installation:
     post:
@@ -139,6 +135,7 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+
   /providers/github/artifact-ready:
     post:
       summary: GitHub release artifact ready
@@ -193,6 +190,30 @@ paths:
           description: OK
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /providers/github/cicd-result:
+    post:
+      summary: Receive result from github action CICD
+      description: Receive result from github action CICD
+      operationId: github-action-result
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - providers
+        - github
+      requestBody:
+        description: Github action result
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GithubActionResultRequest"
+      responses:
+        "200":
+          description: OK
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
 
 components:
   securitySchemes:
@@ -258,32 +279,7 @@ components:
         - created_at
         - updated_at
 
-    ArtifactReadyRequest:
-      type: object
-      x-breu-entity: github_artifact
-      properties:
-        pull_request_id:
-          type: string
-          x-go-name: PullRequestID
-        repo_id:
-          type: string
-          x-go-name: RepoID
-        image:
-          type: string
-        installation_id:
-          type: string
-          x-go-name: InstallationID
-        registry:
-          $ref: "#/components/schemas/OCIImageRegistry"
-        digest:
-          type: string
-      required:
-        - pull_request_id
-        - repo_id
-        - image
-        - installation_id
-        - registry
-        - digest
+
 
     GithubInstallation:
       type: object
@@ -339,48 +335,6 @@ components:
         - created_at
         - updated_at
 
-    CliGitMerge:
-      type: object
-      description: branch name and repo info is sent to quantm via quantum-cli
-      properties:
-        repo_name:
-          type: string
-          x-go-name: RepoName
-        repo_owner:
-          type: string
-          x-go-name: RepoOwner
-        branch:
-          type: string
-          x-go-name: Branch
-      required:
-        - repo_name
-        - repo_owner
-        - branch
-
-    GithubActionResultRequest:
-      type: object
-      description: github action result is sent to quantum along with branch name
-      properties:
-        repo_id:
-          type: string
-          x-go-name: RepoID
-        repo_name:
-          type: string
-          x-go-name: RepoName
-        repo_owner:
-          type: string
-          x-go-name: RepoOwner
-        branch:
-          type: string
-        result:
-          type: string
-      required:
-        - result
-        - branch
-        - repo_owner
-        - repo_name
-        - repo_id
-
     CompleteInstallationRequest:
       type: object
       description: complete the installation given the installation_id & setup_action
@@ -406,6 +360,90 @@ components:
         - suspend
         - unsuspend
         - new_permissions_accepted
+
+    GithubOrgUser:
+      type: object
+      x-breu-entity: github_org_users
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+        github_org_id:
+          type: string
+          format: uuid
+          x-go-name: GithubID
+          x-go-type: gocql.UUID
+        github_user_id:
+          type: string
+          format: uuid
+          x-go-name: GithubUserID
+          x-go-type: gocql.UUID
+        name:
+          description: |
+            The orgination name on github.
+            # TODO - wire up the github webhook to change the name here when we recieve org name change.
+          type: string
+        user_id:
+          description: |
+            Quantm user id
+            type: string
+          type: string
+          format: uuid
+          x-go-name: UserID
+          x-go-type: gocql.UUID
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - github_org_id
+        - github_org_name
+        - github_user_id
+        - user_id
+        - created_at
+        - updated_at          
+
+
+    GithubOrgMembers:
+      type: object
+      x-go-name: GithubOrgMembers
+      x-breu-entity: github_org_members
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        name:
+          type: string
+        email:
+          type: string
+        company:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - name
+        - email
+        - company
+        - created_at
+        - updated_at
+
+
+# The following are not used anymore
+# TODO - deprecate
 
     OCIImageRegistry:
       type: string
@@ -485,34 +523,72 @@ components:
         - created_at
         - updated_at
 
-    GithubOrgMembers:
+    ArtifactReadyRequest:
       type: object
-      x-go-name: GithubOrgMembers
-      x-breu-entity: github_org_members
+      x-breu-entity: github_artifact
       properties:
-        id:
+        pull_request_id:
           type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-          x-entity-part-key: true # cassandra part key
-        name:
+          x-go-name: PullRequestID
+        repo_id:
           type: string
-        email:
+          x-go-name: RepoID
+        image:
           type: string
-        company:
+        installation_id:
           type: string
-        created_at:
+          x-go-name: InstallationID
+        registry:
+          $ref: "#/components/schemas/OCIImageRegistry"
+        digest:
           type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
       required:
-        - id
-        - team_id
-        - name
-        - email
-        - company
-        - created_at
-        - updated_at
+        - pull_request_id
+        - repo_id
+        - image
+        - installation_id
+        - registry
+        - digest
+
+    CliGitMerge:
+      type: object
+      description: branch name and repo info is sent to quantm via quantum-cli
+      properties:
+        repo_name:
+          type: string
+          x-go-name: RepoName
+        repo_owner:
+          type: string
+          x-go-name: RepoOwner
+        branch:
+          type: string
+          x-go-name: Branch
+      required:
+        - repo_name
+        - repo_owner
+        - branch
+
+    GithubActionResultRequest:
+      type: object
+      description: github action result is sent to quantum along with branch name
+      properties:
+        repo_id:
+          type: string
+          x-go-name: RepoID
+        repo_name:
+          type: string
+          x-go-name: RepoName
+        repo_owner:
+          type: string
+          x-go-name: RepoOwner
+        branch:
+          type: string
+        result:
+          type: string
+      required:
+        - result
+        - branch
+        - repo_owner
+        - repo_name
+        - repo_id
+
