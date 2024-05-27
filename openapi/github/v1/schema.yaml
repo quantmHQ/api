@@ -55,7 +55,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GithubUserOrg'
+                  $ref: '#/components/schemas/GithubOrgUser'
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
