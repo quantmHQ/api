@@ -258,7 +258,7 @@ paths:
       description: create user authjs
       operationId: create-user
       tags:
-        - internal
+        - auth
       requestBody:
         description: User to create
         content:

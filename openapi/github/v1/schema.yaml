@@ -40,7 +40,6 @@ paths:
       tags:
         - providers
         - github
-        - internal
       requestBody:
         description: Request body to create mapping betwen users and github org users.
         content:
