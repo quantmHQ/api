@@ -35,15 +35,18 @@ paths:
       description: |
         During GitHub signup, we'll identify users who belong to organizations with the Quanm app installed. This information will 
         personalize the welcome page and help us tailor future onboarding use cases.
-      operationId:
-        - github-org-user-assoications
+      operationId: github-create-user-orgs
+      
+      tags:
+        - providers
+        - github
       responses:
         "201":
           description: Create Association
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateGithubOrgUser'
+                $ref: '#/components/schemas/CreateGithubUserOrgs'
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -138,6 +141,7 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+# TODO - the following paths are not required.
 
   /providers/github/artifact-ready:
     post:
@@ -282,8 +286,6 @@ components:
         - created_at
         - updated_at
 
-
-
     GithubInstallation:
       type: object
       x-go-name: Installation
@@ -373,29 +375,25 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-        github_org_id:
-          type: string
-          format: uuid
-          x-go-name: GithubID
-          x-go-type: gocql.UUID
-        github_user_id:
-          type: string
-          format: uuid
-          x-go-name: GithubUserID
-          x-go-type: gocql.UUID
-        name:
-          description: |
-            The orgination name on github.
-            # TODO - wire up the github webhook to change the name here when we recieve org name change.
-          type: string
         user_id:
           description: |
-            Quantm user id
-            type: string
+            auth's user ID.
           type: string
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+        github_org_id:
+          type: string
+          format: uuid
+          x-go-name: GithubOrgID
+          x-go-type: shared.Int64
+        github_org_name:
+          type: string
+        github_user_id:
+          type: string
+          format: uuid
+          x-go-name: GithubUserID
+          x-go-type: shared.Int64
         created_at:
           type: string
           format: date-time
@@ -411,7 +409,7 @@ components:
         - created_at
         - updated_at
 
-    CreateGithubOrgUser:
+    CreateGithubUserOrgs:
       type: object
       properties:
         user_id:
@@ -419,11 +417,21 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-        github_team_ids:
+        github_user_id:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+        github_org_ids:
           type: array
+          x-go-name: GithubOrgIDs
           items:
             type: integer
-            format: int64           
+            format: int64
+            x-go-type: shared.Int64
+      required:
+        - user_id
+        - github_user_id
+        - github_org_ids           
 
 
     GithubOrgMembers:
