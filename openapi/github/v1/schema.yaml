@@ -43,10 +43,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: integer
-                  format: int64
+                $ref: '#/components/schemas/CreateGithubOrgUser'
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /providers/github/complete-installation:
     post:
@@ -406,7 +409,21 @@ components:
         - github_user_id
         - user_id
         - created_at
-        - updated_at          
+        - updated_at
+
+    CreateGithubOrgUser:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+        github_team_ids:
+          type: array
+          items:
+            type: integer
+            format: int64           
 
 
     GithubOrgMembers:
