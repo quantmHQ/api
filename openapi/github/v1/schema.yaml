@@ -19,7 +19,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/WorkflowResponse"
         "201":
-          description: Created
+          description: Workflow Schduled on Webhook.
           content:
             application/json:
               schema:
@@ -41,13 +41,21 @@ paths:
         - providers
         - github
         - internal
+      requestBody:
+        description: Request body to create mapping betwen users and github org users.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGithubUserOrgs"
       responses:
         "201":
-          description: Create Association
+          description: Created mappings between users and github org users.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateGithubUserOrgs'
+                type: array
+                items:
+                  $ref: '#/components/schemas/GithubUserOrg'
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -433,7 +441,6 @@ components:
         - user_id
         - github_user_id
         - github_org_ids           
-
 
     GithubOrgMembers:
       type: object
