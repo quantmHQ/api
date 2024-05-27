@@ -251,13 +251,14 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+  # FIXME - figure out the security for internal endpoints.
   /auth/users:
     post:
       summary: create user authjs
       description: create user authjs
       operationId: create-user
       tags:
-        - auth
+        - internal
       requestBody:
         description: User to create
         content:

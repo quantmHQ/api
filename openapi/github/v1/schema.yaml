@@ -29,17 +29,18 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+  # FIXME - figure out the security for internal endpoints.
   /providers/github/user-orgs:
     post:
       summary: associate an orgnanization for the user.
       description: |
         During GitHub signup, we'll identify users who belong to organizations with the Quanm app installed. This information will 
         personalize the welcome page and help us tailor future onboarding use cases.
-      operationId: github-create-user-orgs
-      
+      operationId: github-create-user-orgs      
       tags:
         - providers
         - github
+        - internal
       responses:
         "201":
           description: Create Association
