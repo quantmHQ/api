@@ -45,7 +45,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateGithubUserOrgs"
+              $ref: "#/components/schemas/CreateGithubUserOrgsRequest"
       responses:
         "201":
           description: Created mappings between users and github org users.
@@ -417,18 +417,19 @@ components:
         - created_at
         - updated_at
 
-    CreateGithubUserOrgs:
+    CreateGithubUserOrgsRequest:
       type: object
       properties:
         user_id:
           type: string
           format: uuid
-          x-go-name: ID
+          x-go-name: UserID
           x-go-type: gocql.UUID
         github_user_id:
           type: integer
           format: int64
           x-go-type: shared.Int64
+          x-go-name: GithubUserID
         github_org_ids:
           type: array
           x-go-name: GithubOrgIDs
