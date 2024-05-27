@@ -31,8 +31,32 @@ paths:
 
   # FIXME - figure out the security for internal endpoints.
   /providers/github/user-orgs:
+    get:
+      summary: list assoicated organizations
+      operationId: github-list-user-orgs
+      tags:
+        - providers
+        - github
+      security:
+        - BearerAuth: []
+      responses:
+        "201":
+          description: Created mappings between users and github org users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GithubOrgUser'
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
     post:
-      summary: associate an orgnanization for the user.
+      summary: associate github organizations for the newly registered user.
       description: |
         During GitHub signup, we'll identify users who belong to organizations with the Quanm app installed. This information will 
         personalize the welcome page and help us tailor future onboarding use cases.
@@ -377,6 +401,7 @@ components:
     GithubOrgUser:
       type: object
       x-breu-entity: github_org_users
+      x-go-name: OrgUser
       properties:
         id:
           type: string
