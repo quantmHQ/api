@@ -44,8 +44,6 @@ paths:
           required: true
           schema:
             type: string
-      security:
-        - BearerAuth: []
       responses:
         "201":
           description: Created mappings between users and github org users.
