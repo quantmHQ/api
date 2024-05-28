@@ -156,6 +156,16 @@ paths:
       summary: Get GitHub installations
       description: List all the github installations registered with ctrlplane
       operationId: github-get-installations
+      parameters:
+        - name: installation_id
+          in: query
+          description: InstallationID
+          required: false
+          schema:
+            type: integer
+            format: int64
+            x-go-type: shared.Int64
+            x-go-name: InstallationID
       security:
         - BearerAuth: []
         - APIKeyAuth: []
