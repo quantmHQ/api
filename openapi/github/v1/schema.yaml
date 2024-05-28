@@ -52,7 +52,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GithubOrgUser'
+                  $ref: "#/components/schemas/GithubOrgUser"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -65,7 +65,7 @@ paths:
       description: |
         During GitHub signup, we'll identify users who belong to organizations with the Quanm app installed. This information will 
         personalize the welcome page and help us tailor future onboarding use cases.
-      operationId: github-create-user-orgs      
+      operationId: github-create-user-orgs
       tags:
         - providers
         - github
@@ -83,7 +83,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GithubOrgUser'
+                  $ref: "#/components/schemas/GithubOrgUser"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -178,7 +178,7 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
-# TODO - the following paths are not required.
+  # TODO - the following paths are not required.
 
   /providers/github/artifact-ready:
     post:
@@ -258,7 +258,6 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
-
 components:
   securitySchemes:
     BearerAuth:
@@ -333,6 +332,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         team_id:
           type: string
           format: uuid
@@ -413,6 +413,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         user_id:
           description: |
             auth's user ID.
@@ -420,6 +421,7 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         github_org_id:
           type: string
           format: uuid
@@ -470,7 +472,7 @@ components:
       required:
         - user_id
         - github_user_id
-        - github_org_ids           
+        - github_org_ids
 
     GithubOrgMembers:
       type: object
@@ -504,9 +506,8 @@ components:
         - created_at
         - updated_at
 
-
-# The following are not used anymore
-# TODO - deprecate
+    # The following are not used anymore
+    # TODO - deprecate
 
     OCIImageRegistry:
       type: string
@@ -654,4 +655,3 @@ components:
         - repo_owner
         - repo_name
         - repo_id
-

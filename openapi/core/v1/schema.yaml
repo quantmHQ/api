@@ -546,13 +546,13 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         team_id:
           type: string
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         name:
           type: string
         provider_config:
@@ -594,7 +594,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         name:
           type: string
         repo_path:
@@ -613,7 +613,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         stack_id:
           type: string
           format: uuid
@@ -660,7 +660,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         name:
           type: string
         config:
@@ -677,7 +677,7 @@ components:
           format: uuid
           x-go-name: TeamID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         stack_id:
           type: string
           format: uuid
@@ -711,7 +711,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         team_id:
           type: string
           format: uuid
@@ -758,7 +758,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
-          x-entity-part-key: true
+          x-entity-part-key: true # cassandra part key
         team_id:
           type: string
           format: uuid
