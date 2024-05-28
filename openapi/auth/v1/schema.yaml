@@ -584,6 +584,7 @@ components:
           format: uuid
           x-go-name: ID
           x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
         team_id:
           type: string
           format: uuid
@@ -594,6 +595,12 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+        role:
+          type: string
+        is_admin:
+          type: boolean
+        is_active:
+          type: boolean
         created_at:
           type: string
           format: date-time
@@ -604,6 +611,9 @@ components:
         - id
         - team_id
         - user_id
+        - role
+        - is_active
+        - is_admin
         - created_at
         - updated_at
 
