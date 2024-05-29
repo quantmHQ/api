@@ -213,7 +213,7 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
-  /auth/teams/{slug}/users:
+  /auth/teams/{id}/users:
     post:
       summary: Add a user to a team
       description: Add a user to a team
@@ -221,20 +221,21 @@ paths:
       tags:
         - auth
       parameters:
-        - name: slug
+        - name: id
           in: path
           description: Team slug
           required: true
           schema:
             type: string
+            format: uuid
+            x-go-name: ID
+            x-go-type: gocql.UUID
       requestBody:
         description: User to add to the team
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/AddUserToTeamRequest"
-      security:
-        - BearerAuth: []
       responses:
         "201":
           description: User added to team
