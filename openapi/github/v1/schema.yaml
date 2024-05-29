@@ -157,9 +157,15 @@ paths:
       description: List all the github installations registered with ctrlplane
       operationId: github-get-installations
       parameters:
+        - name: installation_login
+          in: query
+          description: github team name
+          required: false
+          schema:
+            type: string
         - name: installation_id
           in: query
-          description: InstallationID
+          description: installation ID of the github app.
           required: false
           schema:
             type: integer
