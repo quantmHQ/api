@@ -264,7 +264,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserRequest"
+              $ref: "#/components/schemas/CreateUserRequest"
       responses:
         "201":
           description: User created
@@ -659,13 +659,18 @@ components:
         - created_at
         - updated_at
 
-    UserRequest:
+    CreateUserRequest:
       type: object
       properties:
         name:
           type: string
         email:
           type: string
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
       required:
         - name
         - email
