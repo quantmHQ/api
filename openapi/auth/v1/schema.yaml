@@ -386,6 +386,14 @@ paths:
       operationId: set-avtive-team
       tags:
         - auth
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
       responses:
         "200":
           description: set the active user team
