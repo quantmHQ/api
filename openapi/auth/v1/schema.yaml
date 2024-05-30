@@ -379,6 +379,29 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+  /auth/teams/{id}/set-active:
+    get:
+      summary: set the active team for user (b/c user has multiple teams)
+      description: set the active team for user (b/c user has multiple teams)
+      operationId: set-avtive-team
+      tags:
+        - auth
+      responses:
+        "200":
+          description: set the active user team
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
 components:
   securitySchemes:
     BearerAuth:
