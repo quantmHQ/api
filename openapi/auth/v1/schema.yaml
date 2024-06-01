@@ -181,7 +181,7 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-  /auth/teams/{slug}:
+  /auth/teams/{id}:
     get:
       summary: Get a team
       description: Get a team
@@ -189,12 +189,13 @@ paths:
       tags:
         - auth
       parameters:
-        - name: slug
+        - name: id
           in: path
           description: Team slug
           required: true
           schema:
             type: string
+            format: uuid
       security:
         - BearerAuth: []
       responses:
@@ -212,7 +213,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /auth/teams/{id}/users:
     post:
       summary: Add a user to a team
@@ -251,6 +251,37 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+  /auth/teams/{id}/set-active:
+    get:
+      summary: set the active team for user (b/c user has multiple teams)
+      description: set the active team for user (b/c user has multiple teams)
+      operationId: set-avtive-team
+      tags:
+        - auth
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: set the active user team
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
 
   # FIXME - figure out the security for internal endpoints.
   /auth/users:
@@ -321,7 +352,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /auth/users/{id}:
     get:
       summary: get user by id
@@ -351,7 +381,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /auth/accounts/link:
     post:
       summary: link user with account
@@ -376,37 +405,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /auth/teams/{id}/set-active:
-    get:
-      summary: set the active team for user (b/c user has multiple teams)
-      description: set the active team for user (b/c user has multiple teams)
-      operationId: set-avtive-team
-      tags:
-        - auth
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: set the active user team
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/User"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
