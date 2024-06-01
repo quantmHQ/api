@@ -229,7 +229,7 @@ paths:
             type: string
             format: uuid
             x-go-name: ID
-            x-go-type: gocql.UUID
+            x-go-type: uuid.UUID
       requestBody:
         description: User to add to the team
         content:
@@ -255,7 +255,7 @@ paths:
     get:
       summary: set the active team for user (b/c user has multiple teams)
       description: set the active team for user (b/c user has multiple teams)
-      operationId: set-avtive-team
+      operationId: set-active-team
       tags:
         - auth
       parameters:
@@ -264,6 +264,9 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
+            x-go-name: ID
+            x-go-type: uuid.UUID
       security:
         - BearerAuth: []
       responses:
