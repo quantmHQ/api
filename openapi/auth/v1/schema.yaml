@@ -196,6 +196,7 @@ paths:
           schema:
             type: string
             format: uuid
+            x-go-type: gocql.UUID
       security:
         - BearerAuth: []
       responses:
@@ -229,7 +230,7 @@ paths:
             type: string
             format: uuid
             x-go-name: ID
-            x-go-type: uuid.UUID
+            x-go-type: gocql.UUID
       requestBody:
         description: User to add to the team
         content:
@@ -266,7 +267,7 @@ paths:
             type: string
             format: uuid
             x-go-name: ID
-            x-go-type: uuid.UUID
+            x-go-type: gocql.UUID
       security:
         - BearerAuth: []
       responses:
