@@ -220,16 +220,16 @@ paths:
       tags:
         - core
       parameters:
-        - name: repo_id
-          in: query
-          description: Repo ID
+        - name: id
+          in: path
+          description: Stack ID
           schema:
             type: string
             format: uuid
             x-go-type: string
-        - name: id
-          in: query
-          description: Stack ID
+        - name: repo_id
+          in: path
+          description: Repo ID
           schema:
             type: string
             format: uuid
