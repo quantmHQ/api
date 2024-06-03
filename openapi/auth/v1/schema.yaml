@@ -132,6 +132,7 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
   /auth/teams:
     get:
       summary: List all teams the user is a member of
@@ -286,7 +287,6 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
-
   # FIXME - figure out the security for internal endpoints.
   /auth/users:
     post:
@@ -385,6 +385,7 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
   /auth/accounts/link:
     post:
       summary: link user with account
@@ -599,6 +600,22 @@ components:
         - created_at
         - updated_at
 
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+      required:
+        - name
+        - email
+
     AddUserToTeamRequest:
       type: object
       properties:
@@ -692,22 +709,6 @@ components:
         - expires_at
         - created_at
         - updated_at
-
-    CreateUserRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        team_id:
-          type: string
-          format: uuid
-          x-go-name: TeamID
-          x-go-type: gocql.UUID
-      required:
-        - name
-        - email
 
     LinkAccountRequest:
       type: object

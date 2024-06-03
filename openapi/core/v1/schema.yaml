@@ -5,293 +5,6 @@ info:
   version: 0.0.1
 
 paths:
-  /core/blueprints:
-    post:
-      summary: Create blueprint
-      description: Create blueprint
-      operationId: create-blueprint
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      requestBody:
-        description: blueprints
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BlueprintCreateRequest"
-      responses:
-        "201":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Blueprint"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/blueprints/{stack_id}:
-    get:
-      summary: Get blueprint
-      description: Get blueprint
-      operationId: get-blueprint
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      parameters:
-        - name: stack_id
-          in: path
-          description: Stack ID
-          required: true
-          schema:
-            type: string
-            format: uuid
-            x-go-type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Blueprint"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/workloads:
-    post:
-      summary: Create workload
-      description: Create workload
-      operationId: create-workload
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      requestBody:
-        description: Workload
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WorkloadCreateRequest"
-      responses:
-        "201":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Workload"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  # Enforce user to provide either of the two query parameters
-  /core/workloads/:
-    get:
-      summary: Get workload
-      description: Get workload
-      operationId: get-workload
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      parameters:
-        - name: repo_id
-          in: query
-          description: Repo ID
-          schema:
-            type: string
-            format: uuid
-            x-go-type: string
-        - name: stack_id
-          in: query
-          description: Stack ID
-          schema:
-            type: string
-            format: uuid
-            x-go-type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                oneOf:
-                  - $ref: "#/components/schemas/Workload"
-                  - $ref: "#/components/schemas/WorkloadListResponse"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/resources:
-    post:
-      summary: Create resource
-      description: Create resource
-      operationId: create-resource
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      requestBody:
-        description: Resource
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ResourceCreateRequest"
-      responses:
-        "201":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Resource"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/resources/{stack_id}:
-    get:
-      summary: Get resource
-      description: Get resource
-      operationId: get-resource
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      parameters:
-        - name: stack_id
-          in: path
-          description: Stack ID
-          required: true
-          schema:
-            type: string
-            format: uuid
-            x-go-type: string
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ResourceListResponse"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/stacks:
-    post:
-      summary: Create stack
-      description: Create stack
-      operationId: create-stack
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      requestBody:
-        description: Stack
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/StackCreateRequest"
-      responses:
-        "201":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Stack"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-    get:
-      summary: List stacks
-      description: List stacks
-      operationId: list-stacks
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StackListResponse"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
-  /core/stacks/{slug}:
-    get:
-      summary: Get stack
-      description: Get stack
-      operationId: get-stack
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
-      tags:
-        - core
-      parameters:
-        - name: slug
-          in: path
-          description: Stack slug
-          required: true
-          schema:
-            type: string
-            format: slug
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Stack"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /core/repos:
     post:
       summary: Create repo
@@ -344,7 +57,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-
   /core/repos/{id}:
     get:
       summary: Get repo
@@ -377,6 +89,286 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
         "404":
           $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /core/stacks:
+    post:
+      summary: Create stack
+      description: Create stack
+      operationId: create-stack
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      requestBody:
+        description: Stack
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StackCreateRequest"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stack"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+    get:
+      summary: List stacks
+      description: List stacks
+      operationId: list-stacks
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StackListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+  /core/stacks/{id}:
+    get:
+      summary: Get stack
+      description: Get stack
+      operationId: get-stack
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      parameters:
+        - name: id
+          in: path
+          description: Stack ID
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Stack"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+  /core/stacks/{id}/blueprints:
+    get:
+      summary: Get blueprint
+      description: Get blueprint
+      operationId: get-blueprint
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      parameters:
+        - name: id
+          in: path
+          description: Stack ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+            x-go-type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blueprint"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+  /core/stacks/{id}/repos/{repo_id}/workloads:
+    get:
+      summary: Get workload
+      description: Get workload
+      operationId: get-workload
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      parameters:
+        - name: repo_id
+          in: query
+          description: Repo ID
+          schema:
+            type: string
+            format: uuid
+            x-go-type: string
+        - name: id
+          in: query
+          description: Stack ID
+          schema:
+            type: string
+            format: uuid
+            x-go-type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/Workload"
+                  - $ref: "#/components/schemas/WorkloadListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+  /core/stacks/{id}/resources:
+    get:
+      summary: Get resource
+      description: Get resource
+      operationId: get-resource
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      parameters:
+        - name: id
+          in: path
+          description: Stack ID
+          required: true
+          schema:
+            type: string
+            format: uuid
+            x-go-type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResourceListResponse"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "404":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /core/blueprints:
+    post:
+      summary: Create blueprint
+      description: Create blueprint
+      operationId: create-blueprint
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      requestBody:
+        description: blueprints
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BlueprintCreateRequest"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Blueprint"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /core/workloads:
+    post:
+      summary: Create workload
+      description: Create workload
+      operationId: create-workload
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      requestBody:
+        description: Workload
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkloadCreateRequest"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workload"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
+  /core/resources:
+    post:
+      summary: Create resource
+      description: Create resource
+      operationId: create-resource
+      security:
+        - BearerAuth: []
+        - APIKeyAuth: []
+      tags:
+        - core
+      requestBody:
+        description: Resource
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourceCreateRequest"
+      responses:
+        "201":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resource"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
