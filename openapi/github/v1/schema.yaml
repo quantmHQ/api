@@ -364,6 +364,11 @@ components:
             validate: required,db_unique
         installation_login:
           type: string
+        installation_login_id:
+          type: integer
+          format: int64
+          x-go-name: InstallationLoginID
+          x-go-type: shared.Int64
         installation_type:
           type: string
         sender_id:
@@ -386,6 +391,7 @@ components:
         - team_id
         - installation_id
         - installation_login
+        - installation_login_id
         - installation_type
         - sender_id
         - sender_login
