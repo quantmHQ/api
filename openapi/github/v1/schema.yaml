@@ -274,6 +274,36 @@ paths:
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
+  # TODO - need to refine
+  /providers/teams/team-user:
+    post:
+      summary: associate team and team users for the newly registered user.
+      description:
+      operationId: create-team-user
+      tags:
+        - providers
+      requestBody:
+        description: Request body to created team user against github org.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTeamUserRequest"
+      responses:
+        "201":
+          description: Created team user against github org.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GithubOrgUser"
+        "400":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
+        "401":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
+        "500":
+          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
+
 components:
   securitySchemes:
     BearerAuth:
@@ -645,3 +675,20 @@ components:
         - repo_owner
         - repo_name
         - repo_id
+
+    CreateTeamUserRequest:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          x-go-name: UserID
+          x-go-type: gocql.UUID
+        github_org_id:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+          x-go-name: GithubOrgID
+      required:
+        - user_id
+        - github_org_id
