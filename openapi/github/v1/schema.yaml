@@ -282,6 +282,7 @@ paths:
       operationId: create-team-user
       tags:
         - providers
+        - github
       requestBody:
         description: Request body to created team user against github org.
         content:
@@ -294,9 +295,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GithubOrgUser"
+                $ref: "#/components/schemas/GithubOrgUser" # TODO: make a response object
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -684,6 +683,11 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+        github_user_id:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+          x-go-name: GithubUserID
         github_org_id:
           type: integer
           format: int64
@@ -691,4 +695,5 @@ components:
           x-go-name: GithubOrgID
       required:
         - user_id
+        - github_user_id
         - github_org_id
