@@ -184,6 +184,40 @@ components:
         - name
         - default_branch
 
+    RepoCreateRequest:
+      type: object
+      properties:
+        ctrl_id:
+          type: string
+          format: uuid
+          x-go-name: CtrlID
+          x-go-type: gocql.UUID
+        is_monorepo:
+          type: boolean
+        threshold:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+        provider:
+          $ref: "#/components/schemas/RepoProvider"
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_data:
+          $ref: "#/components/schemas/MessageProviderData"
+      required:
+        - provider
+        - provider_id
+        - ctrl_id
+        - is_monorepo
+        - threshold
+        - message_provider
+        - message_provider_data
+
+    RepoListResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/Repo"
+
     RepoProvider:
       type: string
       enum:
