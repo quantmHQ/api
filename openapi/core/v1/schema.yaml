@@ -225,14 +225,6 @@ components:
         - gitlab
         - bitbucket
 
-    CloudProvider:
-      type: string
-      description: "aws, gcp, azure"
-      enum:
-        - AWS
-        - GCP
-        - Azure
-
     MessageProvider:
       type: string
       enum:
