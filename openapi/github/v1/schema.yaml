@@ -295,9 +295,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/GithubOrgUser" # TODO: make a response object
+                $ref: "../../auth/v1/schema.yaml#/components/schemas/User" # TODO: make a response object
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
