@@ -134,27 +134,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
 
   /auth/teams:
-    get:
-      summary: List all teams the user is a member of
-      description: List all teams the user is a member of
-      operationId: list-teams
-      tags:
-        - auth
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: Teams retrieved
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TeamList"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
     post:
       summary: Create a new team
       description: Create a new team
@@ -180,77 +159,6 @@ paths:
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
           $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-  /auth/teams/{id}:
-    get:
-      summary: Get a team
-      description: Get a team
-      operationId: get-team
-      tags:
-        - auth
-      parameters:
-        - name: id
-          in: path
-          description: Team slug
-          required: true
-          schema:
-            type: string
-            format: uuid
-            x-go-type: gocql.UUID
-      security:
-        - BearerAuth: []
-      responses:
-        "200":
-          description: Team retrieved
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Team"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
-        "500":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
-  /auth/teams/{id}/users:
-    post:
-      summary: Add a user to a team
-      description: Add a user to a team
-      operationId: add-user-to-team
-      tags:
-        - auth
-      parameters:
-        - name: id
-          in: path
-          description: Team slug
-          required: true
-          schema:
-            type: string
-            format: uuid
-            x-go-name: ID
-            x-go-type: gocql.UUID
-      requestBody:
-        description: User to add to the team
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AddUserToTeamRequest"
-      responses:
-        "201":
-          description: User added to team
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TeamUser"
-        "400":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
-        "401":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/Unauthorized"
-        "404":
-          $ref: "../../shared/v1/schema.yaml#/components/responses/NotFound"
         "500":
           $ref: "../../shared/v1/schema.yaml#/components/responses/InternalServerError"
   /auth/teams/{id}/set-active:
@@ -539,14 +447,6 @@ components:
             validate:
       required:
         - name
-
-    TeamList:
-      type: object
-      properties:
-        teams:
-          type: array
-          items:
-            $ref: "#/components/schemas/Team"
 
     User:
       type: object
