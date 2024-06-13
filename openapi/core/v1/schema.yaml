@@ -119,11 +119,6 @@ components:
           x-go-name: TeamID
           x-go-type: gocql.UUID
           x-entity-part-key: true # cassandra part key
-        stack_id:
-          type: string
-          format: uuid
-          x-go-name: StackID
-          x-go-type: gocql.UUID
         provider:
           $ref: "#/components/schemas/RepoProvider"
         provider_id:
@@ -161,7 +156,6 @@ components:
         - name
         - id
         - team_id
-        - stack_id
         - provider
         - provider_id
         - ctrl_id
