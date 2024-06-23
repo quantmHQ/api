@@ -172,9 +172,6 @@ paths:
             format: int64
             x-go-type: shared.Int64
             x-go-name: InstallationID
-      security:
-        - BearerAuth: []
-        - APIKeyAuth: []
       tags:
         - providers
         - github
