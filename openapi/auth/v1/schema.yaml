@@ -255,7 +255,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: "#/components/schemas/UserWithRole"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "401":
@@ -515,6 +515,62 @@ components:
       required:
         - name
         - email
+
+    UserWithRole:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        email:
+          type: string
+          format: email
+          x-go-type: string
+          x-oapi-codegen-extra-tags:
+            validate: email,required,db_unique
+        password:
+          type: string
+          format: password
+          x-go-json-ignore: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        is_verified:
+          type: boolean
+        is_active:
+          type: boolean
+        role:
+          type: string
+        is_admin:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - email
+        - password
+        - first_name
+        - last_name
+        - is_verified
+        - is_active
+        - role
+        - is_admin
+        - created_at
+        - updated_at
 
     AddUserToTeamRequest:
       type: object
