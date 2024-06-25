@@ -608,6 +608,12 @@ components:
           type: boolean
         is_active:
           type: boolean
+        is_message_provider_linked:
+          type: boolean
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_user_info:
+          $ref: "#/components/schemas/MessageProviderUserInfo"
         created_at:
           type: string
           format: date-time
@@ -621,6 +627,9 @@ components:
         - role
         - is_active
         - is_admin
+        - is_message_provider_linked
+        - message_provider
+        - message_provider_user_info
         - created_at
         - updated_at
 
@@ -699,3 +708,32 @@ components:
         - oauth
         - email
         - webauthn
+
+    MessageProviderUserInfo:
+      type: object
+      properties:
+        slack:
+          $ref: "#/components/schemas/MessageProviderSlackUserInfo"
+
+    MessageProviderSlackUserInfo:
+      type: object
+      properties:
+        user_token:
+          type: string
+        provider_user_id:
+          type: string
+          x-go-name: ProviderUserID
+        provider_team_id:
+          type: string
+          x-go-name: ProviderTeamID
+      required:
+        - user_token
+        - provider_user_id
+        - provider_team_id
+
+    # TODO - remove from code and fix cycle imports
+    MessageProvider:
+      type: string
+      enum:
+        - none
+        - slack
