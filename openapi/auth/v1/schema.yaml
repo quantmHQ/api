@@ -552,6 +552,8 @@ components:
           type: string
         is_admin:
           type: boolean
+        is_message_provider_linked:
+          type: boolean
         created_at:
           type: string
           format: date-time
@@ -569,6 +571,7 @@ components:
         - is_active
         - role
         - is_admin
+        - is_message_provider_linked
         - created_at
         - updated_at
 
