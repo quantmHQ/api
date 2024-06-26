@@ -721,6 +721,8 @@ components:
     MessageProviderSlackUserInfo:
       type: object
       properties:
+        bot_token:
+          type: string
         user_token:
           type: string
         provider_user_id:
@@ -730,6 +732,7 @@ components:
           type: string
           x-go-name: ProviderTeamID
       required:
+        - bot_token
         - user_token
         - provider_user_id
         - provider_team_id
