@@ -605,6 +605,10 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+        user_login_id: # this is refence to provider unique id
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
         role:
           type: string
         is_admin:
@@ -627,6 +631,7 @@ components:
         - id
         - team_id
         - user_id
+        - user_login_id
         - role
         - is_active
         - is_admin
