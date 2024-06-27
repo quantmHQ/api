@@ -473,6 +473,11 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
         github_user_id:
           type: integer
           format: int64
@@ -485,5 +490,6 @@ components:
           x-go-name: GithubOrgID
       required:
         - user_id
+        - team_id
         - github_user_id
         - github_org_id
