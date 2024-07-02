@@ -389,7 +389,6 @@ components:
           format: uuid
           x-go-name: UserID
           x-go-type: gocql.UUID
-          x-entity-part-key: true # cassandra part key
         github_org_id:
           type: string
           format: uuid
