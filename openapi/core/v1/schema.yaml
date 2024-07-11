@@ -146,6 +146,9 @@ components:
           type: integer
           format: int64
           x-go-type: shared.Int64
+        stale_time:
+          type: string
+          x-go-type: time.Duration
         created_at:
           type: string
           format: date-time
@@ -164,6 +167,7 @@ components:
         - message_provider
         - message_provider_data
         - threshold
+        - stale_time
         - created_at
         - updated_at
 
@@ -192,6 +196,9 @@ components:
           type: integer
           format: int64
           x-go-type: shared.Int64
+        stale_time:
+          type: string
+          x-go-type: time.Duration
         provider:
           $ref: "#/components/schemas/RepoProvider"
         message_provider:
@@ -204,6 +211,7 @@ components:
         - ctrl_id
         - is_monorepo
         - threshold
+        - stale_time
         - message_provider
         - message_provider_data
 
