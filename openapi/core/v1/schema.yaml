@@ -148,7 +148,7 @@ components:
           x-go-type: shared.Int64
         stale_time:
           type: string
-          x-go-type: time.Duration
+          x-go-type: shared.Duration
         created_at:
           type: string
           format: date-time
@@ -198,7 +198,7 @@ components:
           x-go-type: shared.Int64
         stale_time:
           type: string
-          x-go-type: time.Duration
+          x-go-type: shared.Duration
         provider:
           $ref: "#/components/schemas/RepoProvider"
         message_provider:
