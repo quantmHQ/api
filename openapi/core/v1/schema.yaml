@@ -146,7 +146,7 @@ components:
           type: integer
           format: int64
           x-go-type: shared.Int64
-        stale_time:
+        stale_duration:
           type: string
           x-go-type: shared.Duration
         created_at:
@@ -167,7 +167,7 @@ components:
         - message_provider
         - message_provider_data
         - threshold
-        - stale_time
+        - stale_duration
         - created_at
         - updated_at
 
@@ -196,7 +196,7 @@ components:
           type: integer
           format: int64
           x-go-type: shared.Int64
-        stale_time:
+        stale_duration:
           type: string
           x-go-type: shared.Duration
         provider:
@@ -211,7 +211,7 @@ components:
         - ctrl_id
         - is_monorepo
         - threshold
-        - stale_time
+        - stale_duration
         - message_provider
         - message_provider_data
 
