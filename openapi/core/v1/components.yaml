@@ -1,0 +1,174 @@
+openapi: 3.0.0
+
+info:
+  title: core
+  version: 0.0.1
+
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/BearerAuth"
+    APIKeyAuth:
+      $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
+
+  schemas:
+    Repo:
+      type: object
+      x-breu-entity: repos
+      x-breu-entity-type: cql
+      properties:
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        provider:
+          $ref: "#/components/schemas/RepoProvider"
+        provider_id:
+          type: string
+          x-go-name: ProviderID
+        ctrl_id:
+          description: |
+            references the id field of the repos tables against the provider. For us, this means, that it will be the id field for
+              - github_repos
+              - gitlab_repos
+            etc.
+          type: string
+          format: uuid
+          x-go-name: CtrlID
+          x-go-type: gocql.UUID
+        default_branch:
+          type: string
+        is_monorepo:
+          type: boolean
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_data:
+          $ref: "#/components/schemas/MessageProviderData"
+        threshold:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+        stale_duration:
+          type: string
+          x-go-type: shared.Duration
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - name
+        - id
+        - team_id
+        - provider
+        - provider_id
+        - ctrl_id
+        - default_branch
+        - is_monorepo
+        - message_provider
+        - message_provider_data
+        - threshold
+        - stale_duration
+        - created_at
+        - updated_at
+
+    RepoProviderData:
+      type: object
+      properties:
+        name:
+          type: string
+        default_branch:
+          type: string
+      required:
+        - name
+        - default_branch
+
+    RepoCreateRequest:
+      type: object
+      properties:
+        ctrl_id:
+          type: string
+          format: uuid
+          x-go-name: CtrlID
+          x-go-type: gocql.UUID
+        is_monorepo:
+          type: boolean
+        threshold:
+          type: integer
+          format: int64
+          x-go-type: shared.Int64
+        stale_duration:
+          type: string
+          x-go-type: shared.Duration
+        provider:
+          $ref: "#/components/schemas/RepoProvider"
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_data:
+          $ref: "#/components/schemas/MessageProviderData"
+      required:
+        - provider
+        - provider_id
+        - ctrl_id
+        - is_monorepo
+        - threshold
+        - stale_duration
+        - message_provider
+        - message_provider_data
+
+    RepoListResponse:
+      type: array
+      items:
+        $ref: "#/components/schemas/Repo"
+
+    RepoProvider:
+      type: string
+      enum:
+        - github
+        - gitlab
+        - bitbucket
+
+    MessageProvider:
+      type: string
+      enum:
+        - none
+        - slack
+
+    MessageProviderData:
+      type: object
+      properties:
+        slack:
+          $ref: "#/components/schemas/MessageProviderSlackData"
+
+    MessageProviderSlackData:
+      type: object
+      properties:
+        bot_token:
+          type: string
+        channel_id:
+          type: string
+          x-go-name: ChannelID
+        channel_name:
+          type: string
+        workspace_id:
+          type: string
+          x-go-name: WorkspaceID
+        workspace_name:
+          type: string
+      required:
+        - bot_token
+        - channel_id
+        - channel_name
+        - workspace_id
+        - workspace_name
