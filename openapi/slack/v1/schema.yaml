@@ -25,7 +25,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "../../core/v1/schema.yaml#/components/schemas/MessageProviderData"
+                $ref: "../../core/v1/components.yaml#/components/schemas/MessageProviderData"
         "400":
           $ref: "../../shared/v1/schema.yaml#/components/responses/BadRequest"
         "500":
