@@ -22,7 +22,7 @@ components:
       properties:
         message:
           type: string
-          x-go-type: interface{}
+          x-go-type: error
         code:
           type: integer
         internal:
