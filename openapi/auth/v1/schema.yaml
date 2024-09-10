@@ -329,6 +329,194 @@ components:
       $ref: "../../shared/v1/schema.yaml#/components/securitySchemes/APIKeyAuth"
 
   schemas:
+    Account:
+      type: object
+      x-breu-entity: oauth_accounts
+      x-breu-entity-type: cql
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true
+        user_id:
+          type: string
+          format: uuid
+          x-go-name: UserID
+          x-go-type: gocql.UUID
+        type:
+          $ref: "#/components/schemas/AccountTypeEnum"
+        provider:
+          type: string
+        provider_account_id:
+          type: string
+          x-go-name: ProviderAccountID
+        expires_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - user_id
+        - type
+        - provider
+        - provider_account_id
+        - expires_at
+        - created_at
+        - updated_at
+
+    Team:
+      type: object
+      x-breu-entity: teams
+      x-breu-entity-type: cql
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true
+        name:
+          type: string
+          x-oapi-codegen-extra-tags:
+            validate: required
+        slug:
+          type: string
+          format: slug
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - slug
+        - created_at
+        - updated_at
+
+    User:
+      type: object
+      x-breu-entity: users
+      x-breu-entity-type: cql
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        email:
+          type: string
+          format: email
+          x-go-type: string
+          x-oapi-codegen-extra-tags:
+            validate: email,required,db_unique
+        password:
+          type: string
+          format: password
+          x-go-json-ignore: true
+        first_name:
+          type: string
+        last_name:
+          type: string
+        is_verified:
+          type: boolean
+        is_active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - email
+        - password
+        - first_name
+        - last_name
+        - is_verified
+        - is_active
+        - created_at
+        - updated_at
+
+    TeamUser:
+      type: object
+      description: |
+        defines the user in a team and the role they have in the team. 
+        Please note that auth.User is our source of truth for the user, so we should only use this to get to the user.
+      x-breu-entity: team_users
+      x-breu-entity-type: cql
+      properties:
+        id:
+          type: string
+          format: uuid
+          x-go-name: ID
+          x-go-type: gocql.UUID
+          x-entity-part-key: true # cassandra part key
+        team_id:
+          type: string
+          format: uuid
+          x-go-name: TeamID
+          x-go-type: gocql.UUID
+        user_id:
+          type: string
+          format: uuid
+          x-go-name: UserID
+          x-go-type: gocql.UUID
+        user_login_id:
+          type: integer
+          description: |
+            this should be renamed to provider_account_id
+          format: int64
+          x-go-type: shared.Int64
+        role:
+          type: string
+        is_admin:
+          type: boolean
+        is_active:
+          type: boolean
+        is_message_provider_linked:
+          type: boolean
+        message_provider:
+          $ref: "#/components/schemas/MessageProvider"
+        message_provider_user_info:
+          $ref: "#/components/schemas/MessageProviderUserInfo"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - team_id
+        - user_id
+        - user_login_id
+        - role
+        - is_active
+        - is_admin
+        - is_message_provider_linked
+        - message_provider
+        - message_provider_user_info
+        - created_at
+        - updated_at
+
+  
     RegisterationRequest:
       type: object
       properties:
@@ -406,38 +594,7 @@ components:
       properties:
         message:
           type: string
-
-    Team:
-      type: object
-      x-breu-entity: teams
-      x-breu-entity-type: cql
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-          x-entity-part-key: true
-        name:
-          type: string
-          x-oapi-codegen-extra-tags:
-            validate: required
-        slug:
-          type: string
-          format: slug
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - name
-        - slug
-        - created_at
-        - updated_at
-
+  
     CreateTeamRequest:
       type: object
       properties:
@@ -447,58 +604,6 @@ components:
             validate:
       required:
         - name
-
-    User:
-      type: object
-      x-breu-entity: users
-      x-breu-entity-type: cql
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-          x-entity-part-key: true # cassandra part key
-        team_id:
-          type: string
-          format: uuid
-          x-go-name: TeamID
-          x-go-type: gocql.UUID
-        email:
-          type: string
-          format: email
-          x-go-type: string
-          x-oapi-codegen-extra-tags:
-            validate: email,required,db_unique
-        password:
-          type: string
-          format: password
-          x-go-json-ignore: true
-        first_name:
-          type: string
-        last_name:
-          type: string
-        is_verified:
-          type: boolean
-        is_active:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - team_id
-        - email
-        - password
-        - first_name
-        - last_name
-        - is_verified
-        - is_active
-        - created_at
-        - updated_at
 
     CreateUserRequest:
       type: object
@@ -583,105 +688,6 @@ components:
           format: uuid
       required:
         - team_id
-
-    TeamUser:
-      type: object
-      x-breu-entity: team_users
-      x-breu-entity-type: cql
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-          x-entity-part-key: true # cassandra part key
-        team_id:
-          type: string
-          format: uuid
-          x-go-name: TeamID
-          x-go-type: gocql.UUID
-        user_id:
-          type: string
-          format: uuid
-          x-go-name: UserID
-          x-go-type: gocql.UUID
-        user_login_id: # this is refence to provider unique id
-          type: integer
-          format: int64
-          x-go-type: shared.Int64
-        role:
-          type: string
-        is_admin:
-          type: boolean
-        is_active:
-          type: boolean
-        is_message_provider_linked:
-          type: boolean
-        message_provider:
-          $ref: "#/components/schemas/MessageProvider"
-        message_provider_user_info:
-          $ref: "#/components/schemas/MessageProviderUserInfo"
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - team_id
-        - user_id
-        - user_login_id
-        - role
-        - is_active
-        - is_admin
-        - is_message_provider_linked
-        - message_provider
-        - message_provider_user_info
-        - created_at
-        - updated_at
-
-    Account:
-      type: object
-      x-breu-entity: oauth_accounts
-      x-breu-entity-type: cql
-      properties:
-        id:
-          type: string
-          format: uuid
-          x-go-name: ID
-          x-go-type: gocql.UUID
-          x-entity-part-key: true
-        user_id:
-          type: string
-          format: uuid
-          x-go-name: UserID
-          x-go-type: gocql.UUID
-        type:
-          $ref: "#/components/schemas/AccountTypeEnum"
-        provider:
-          type: string
-        provider_account_id:
-          type: string
-          x-go-name: ProviderAccountID
-        expires_at:
-          type: string
-          format: date-time
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-      required:
-        - id
-        - user_id
-        - type
-        - provider
-        - provider_account_id
-        - expires_at
-        - created_at
-        - updated_at
 
     LinkAccountRequest:
       type: object
