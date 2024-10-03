@@ -57,10 +57,10 @@ components:
         threshold:
           type: integer
           format: int64
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         stale_duration:
           type: string
-          x-go-type: shared.Duration
+          x-go-type: db.Duration
         created_at:
           type: string
           format: date-time
@@ -107,10 +107,10 @@ components:
         threshold:
           type: integer
           format: int64
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         stale_duration:
           type: string
-          x-go-type: shared.Duration
+          x-go-type: db.Duration
         provider:
           $ref: "#/components/schemas/RepoProvider"
         message_provider:

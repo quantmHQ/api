@@ -170,7 +170,7 @@ paths:
           schema:
             type: integer
             format: int64
-            x-go-type: shared.Int64
+            x-go-type: db.Int64
             x-go-name: InstallationID
       tags:
         - providers
@@ -243,7 +243,7 @@ components:
           type: integer
           format: int64
           x-go-name: GithubID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         team_id:
           type: string
           format: uuid
@@ -254,7 +254,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         name:
           type: string
         full_name:
@@ -305,7 +305,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
           x-oapi-codegen-extra-tags:
             validate: required,db_unique
         installation_login:
@@ -314,14 +314,14 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationLoginID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         installation_type:
           type: string
         sender_id:
           type: integer
           format: int64
           x-go-name: SenderID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         sender_login:
           type: string
         status:
@@ -353,7 +353,7 @@ components:
           type: integer
           format: int64
           x-go-name: InstallationID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         setup_action:
           $ref: "#/components/schemas/SetupAction"
       required:
@@ -393,14 +393,14 @@ components:
           type: string
           format: uuid
           x-go-name: GithubOrgID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         github_org_name:
           type: string
         github_user_id:
           type: string
           format: uuid
           x-go-name: GithubUserID
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
         created_at:
           type: string
           format: date-time
@@ -427,7 +427,7 @@ components:
         github_user_id:
           type: integer
           format: int64
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
           x-go-name: GithubUserID
         github_org_ids:
           type: array
@@ -435,7 +435,7 @@ components:
           items:
             type: integer
             format: int64
-            x-go-type: shared.Int64
+            x-go-type: db.Int64
       required:
         - user_id
         - github_user_id
@@ -480,12 +480,12 @@ components:
         github_user_id:
           type: integer
           format: int64
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
           x-go-name: GithubUserID
         github_org_id:
           type: integer
           format: int64
-          x-go-type: shared.Int64
+          x-go-type: db.Int64
           x-go-name: GithubOrgID
       required:
         - user_id
