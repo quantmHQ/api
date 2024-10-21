@@ -1,0 +1,11 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: go.breu.io/quantm/internal/proto
+plugins:
+  - remote: buf.build/bufbuild/es:v2.2.0
+    include_imports: true
+    include_wkt: true
+    out: proto

@@ -1,0 +1,21 @@
+version: v2
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: go.breu.io/quantm/internal/nomad/proto
+plugins:
+  - remote: buf.build/grpc/go
+    include_imports: true
+    include_wkt: true
+    out: ../internal/nomad/proto
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+
+  - remote: buf.build/protocolbuffers/go
+    include_imports: true
+    include_wkt: true
+    out: ../internal/nomad/proto
+    opt:
+      - paths=source_relative

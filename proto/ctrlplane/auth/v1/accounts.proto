@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "ctrlplane/common/v1/uuid.proto";
+import "google/protobuf/timestamp.proto";
+
+enum Provider {
+  PROVIDER_UNSPECIFIED = 0;
+  PROVIDER_GOOGLE = 1;
+  PROVIDER_GITHUB = 2;
+}
+
+message Account {
+  ctrlplane.common.v1.UUID id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  ctrlplane.common.v1.UUID user_id = 4;
+  Provider provider = 5;
+  string provider_account_id = 6;
+  google.protobuf.Timestamp expires_at = 7;
+  string kind = 8;
+}
+
+message GetAccountByProviderAccountIDRequest {
+  Provider provider = 1;
+  string provider_account_id = 2;
+}
+
+message GetAccountByProviderAccountIDResponse {
+  Account account = 1;
+}
+
+service AccountService {
+  // GetAccountByProviderAccountID returns an account by provider and provider account ID.
+  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
+}
