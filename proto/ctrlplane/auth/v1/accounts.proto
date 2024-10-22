@@ -31,7 +31,28 @@ message GetAccountByProviderAccountIDResponse {
   Account account = 1;
 }
 
+message GetAccountByUserIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
+
+message GetAccountByUserIDResponse {
+  Account account = 1;
+}
+
+message CreateAccountRequest {
+  ctrlplane.common.v1.UUID user_id = 4;
+  Provider provider = 5;
+  string provider_account_id = 6;
+  google.protobuf.Timestamp expires_at = 7;
+  string kind = 8;
+}
+
+message CreateAccountResponse {
+  Account account = 1;
+}
+
 service AccountService {
-  // GetAccountByProviderAccountID returns an account by provider and provider account ID.
   rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
+  rpc GetAccountByUserID(GetAccountByUserIDRequest) returns (GetAccountByUserIDResponse);
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 }
