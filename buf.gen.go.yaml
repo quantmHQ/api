@@ -5,17 +5,19 @@ managed:
     - file_option: go_package_prefix
       value: go.breu.io/quantm/internal/nomad/proto
 plugins:
-  - remote: buf.build/grpc/go
+  # go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
+  - local: protoc-gen-connect-go
     include_imports: true
-    include_wkt: true
+    include_wkt: false
     out: ../internal/nomad/proto
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
 
-  - remote: buf.build/protocolbuffers/go
+  # go install github.com/golang/protobuf/protoc-gen-go@latest
+  - local: protoc-gen-go
     include_imports: true
-    include_wkt: true
+    include_wkt: false
     out: ../internal/nomad/proto
     opt:
       - paths=source_relative
