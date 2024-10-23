@@ -5,12 +5,14 @@ managed:
     - file_option: go_package_prefix
       value: go.breu.io/quantm/internal/proto
 plugins:
+  # npm install -g @bufbuild/protoc-gen-es@"^1.0.0"
   - local: protoc-gen-es
     include_imports: false
     include_wkt: false
     opt: target=ts
     out: ../packages/nomad/lib/proto
 
+  # npm install -g @connectrpc/protoc-gen-connect-es@"^1.0.0"
   - local: protoc-gen-connect-es
     opt:
       - target=ts
