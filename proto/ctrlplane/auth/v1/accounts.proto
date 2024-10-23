@@ -19,7 +19,7 @@ message Account {
   Provider provider = 5;
   string provider_account_id = 6;
   google.protobuf.Timestamp expires_at = 7;
-  string kind = 8;
+  string kind = 8; // Using "kind" instead of "type" which is a reserved word
 }
 
 message GetAccountByProviderAccountIDRequest {
@@ -31,28 +31,37 @@ message GetAccountByProviderAccountIDResponse {
   Account account = 1;
 }
 
-message GetAccountByUserIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
+message GetAccountsByUserIDRequest { // Pluralized for multiple accounts
+  ctrlplane.common.v1.UUID user_id = 1;
 }
 
-message GetAccountByUserIDResponse {
-  Account account = 1;
+message GetAccountsByUserIDResponse { // Pluralized for multiple accounts
+  repeated Account accounts = 1; // Repeated field for multiple accounts
 }
 
 message CreateAccountRequest {
-  ctrlplane.common.v1.UUID user_id = 4;
-  Provider provider = 5;
-  string provider_account_id = 6;
-  google.protobuf.Timestamp expires_at = 7;
-  string kind = 8;
+  ctrlplane.common.v1.UUID user_id = 1;
+  Provider provider = 2;
+  string provider_account_id = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  string kind = 5; // Using "kind" instead of "type"
 }
 
 message CreateAccountResponse {
   Account account = 1;
 }
 
+message GetAccountByIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
+
+message GetAccountByIDResponse {
+  Account account = 1;
+}
+
 service AccountService {
   rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
-  rpc GetAccountByUserID(GetAccountByUserIDRequest) returns (GetAccountByUserIDResponse);
+  rpc GetAccountsByUserID(GetAccountsByUserIDRequest) returns (GetAccountsByUserIDResponse); // Updated method signature
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc GetAccountByID(GetAccountByIDRequest) returns (GetAccountByIDResponse);
 }
