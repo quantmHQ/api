@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ctrlplane.healthz.v1;
+
+message HealthCheckRequest {
+}
+
+message HealthCheckResponse {
+  bool database = 1;
+  bool temporal = 2;
+}
+
+service HealthCheckService {
+  rpc Status(HealthCheckRequest) returns (HealthCheckResponse);
+}

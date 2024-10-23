@@ -5,7 +5,13 @@ managed:
     - file_option: go_package_prefix
       value: go.breu.io/quantm/internal/proto
 plugins:
-  - remote: buf.build/bufbuild/es:v2.2.0
+  - local: protoc-gen-es
     include_imports: true
     include_wkt: true
-    out: proto
+    opt: target=ts
+    out: ../packages/nomad/lib/proto
+  - local: protoc-gen-connect-es
+    opt:
+      - target=ts
+      - import_extension=.ts
+    out: ../packages/nomad/lib/proto
