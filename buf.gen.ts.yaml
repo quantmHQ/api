@@ -6,10 +6,11 @@ managed:
       value: go.breu.io/quantm/internal/proto
 plugins:
   - local: protoc-gen-es
-    include_imports: true
-    include_wkt: true
+    include_imports: false
+    include_wkt: false
     opt: target=ts
     out: ../packages/nomad/lib/proto
+
   - local: protoc-gen-connect-es
     opt:
       - target=ts
