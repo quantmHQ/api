@@ -2,8 +2,7 @@ syntax = "proto3";
 
 package ctrlplane.healthz.v1;
 
-message HealthCheckRequest {
-}
+import "google/protobuf/empty.proto";
 
 message HealthCheckResponse {
   bool database = 1;
@@ -11,5 +10,5 @@ message HealthCheckResponse {
 }
 
 service HealthCheckService {
-  rpc Status(HealthCheckRequest) returns (HealthCheckResponse);
+  rpc Status(google.protobuf.Empty) returns (HealthCheckResponse);
 }
