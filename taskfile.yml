@@ -1,0 +1,17 @@
+version: "3"
+
+tasks:
+  go:
+    desc: Generate Go code from Protobuf files
+    cmds:
+      - buf generate --template buf.gen.go.yaml
+
+  ts:
+    desc: Generate TypeScript code from Protobuf files
+    cmds:
+      - buf generate --template buf.gen.ts.yaml
+
+  lint:
+    desc: Lint Protobuf files
+    cmds:
+    - buf lint

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package ctrlplane.healthz.v1;
+
+import "google/protobuf/empty.proto";
+
+message HealthCheckResponse {
+  bool database = 1;
+  bool temporal = 2;
+}
+
+service HealthCheckService {
+  rpc Status(google.protobuf.Empty) returns (HealthCheckResponse);
+}
