@@ -1,3 +1,48 @@
 syntax = "proto3";
 
 package ctrlplane.auth.v1;
+
+import "ctrlplane/common/v1/uuid.proto";
+import "google/protobuf/timestamp.proto";
+
+message Org {
+  ctrlplane.common.v1.UUID id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string domain = 5;
+  string slug = 6;
+}
+
+message CreateOrgRequest {
+  string name = 1;
+  string domain = 2;
+  string slug = 3;
+}
+
+message CreateOrgResponse {
+  Org org = 1;
+}
+
+message GetOrgByIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
+
+message GetOrgByIDResponse {
+  Org org = 1;
+}
+
+message UpdateOrgByIDRequest {
+  string name = 1;
+  string slug = 2;
+}
+
+message UpdateOrgByIDResponse {
+  Org org = 1;
+}
+
+service OrgService {
+  rpc CreateOrg(CreateOrgRequest) returns (CreateOrgResponse);
+  rpc GetOrgByID(GetOrgByIDRequest) returns (GetOrgByIDResponse);
+  rpc UpdateOrgByID(UpdateOrgByIDRequest) returns (UpdateOrgByIDResponse);
+}

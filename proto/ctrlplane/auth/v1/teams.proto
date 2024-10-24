@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "ctrlplane/common/v1/uuid.proto";
+import "google/protobuf/timestamp.proto";
+
+message Team {
+  ctrlplane.common.v1.UUID id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string slug = 5;
+}
+
+message CreateTeamRequest {
+  string name = 1;
+  string org_id = 2;
+}
+
+message CreateTeamResponse {
+  Team team = 1;
+}
+
+service TeamService {
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse);
+}
