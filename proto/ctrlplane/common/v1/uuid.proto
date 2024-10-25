@@ -2,34 +2,26 @@ syntax = "proto3";
 
 package ctrlplane.common.v1;
 
-// A UUID, encoded in accordance with section 4.1.2 of RFC 4122.
+// Represents a universally unique identifier (UUID) as a string.
 //
-// Native is the most compact (18 bytes) with least amoutn for encoding/decoding.
-// but we will have to write custom serialization/deserialization code for it for all languages and we don't have time, strings it is i.e.
-// 38 bytes. Leaveing the implemenation for future reference.
+// A native 18-byte representation, conforming to RFC 4122 section 4.1.2, would offer optimal performance in terms of
+// size. However, it requires custom serialization logic across platforms, making it impractical for current needs.
 //
-// LINK: https://github.com/protocolbuffers/protobuf/issues/2224.
+// Native UUID representation (for future reference):
 //
-// message UUID {
-// 	// The low field of the timestamp (32 bits).
-// 	fixed32 time_low = 1;
-
-// 	// The middle field of the timestamp (16 bits).
-// 	uint32 time_mid = 2;
-
-// 	// The high field of the timestamp multiplexed with the version number (16 bits).
-// 	uint32 time_hi_and_version = 3;
-
-// 	// The high field of the clock sequence multiplexed with the variant (8 bits).
-// 	uint32 clock_seq_hi_and_reserved = 4;
-
-// 	// The low field of the clock sequence (8 bits).
-// 	uint32 clock_seq_low = 5;
-
-// 	// The spatially unique node identifier (48 bits).
-// 	uint64 node = 6;
-// }
-
+//   message UUID {
+//     fixed16 time_low = 1;                  // 32 bits: The low field of the timestamp.
+//     fixed16 time_mid = 2;                  // 16 bits: The middle field of the timestamp.
+//     fixed16 time_hi_and_version = 3;       // 16 bits: The high field of the timestamp multiplexed with the version number.
+//     fixed16 clock_seq_hi_and_reserved = 4; // 8 bits: The high field of the clock sequence multiplexed with the variant.
+//     fixed16 clock_seq_low = 5;             // 8 bits: The low field of the clock sequence.
+//     fixed64 node = 6;                      // 48 bits: The spatially unique node identifier.
+//   }
+//
+// This string representation provides universal compatibility and simpler implementation at the cost of increased size.
+// Future optimization may consider a native format for improved efficiency.
+//
+// See https://github.com/protocolbuffers/protobuf/issues/2224 for relevant discussion.
 message UUID {
   string value = 1;
 }
