@@ -39,6 +39,9 @@ message GetUserByEmailResponse {
 }
 
 service UserService {
+// CreateUser creates a new user, associating it with the given domain. Domains are unique to organizations.
+// If the domain is not registered, this method will create a new organization and assign the user to it.
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
 }
