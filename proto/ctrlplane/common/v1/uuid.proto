@@ -9,6 +9,7 @@ package ctrlplane.common.v1;
 //
 // Native UUID representation (for future reference):
 //
+// ```proto
 //   message UUID {
 //     fixed16 time_low = 1;                  // 32 bits: The low field of the timestamp.
 //     fixed16 time_mid = 2;                  // 16 bits: The middle field of the timestamp.
@@ -17,6 +18,7 @@ package ctrlplane.common.v1;
 //     fixed16 clock_seq_low = 5;             // 8 bits: The low field of the clock sequence.
 //     fixed64 node = 6;                      // 48 bits: The spatially unique node identifier.
 //   }
+// ```
 //
 // This string representation provides universal compatibility and simpler implementation at the cost of increased size.
 // Future optimization may consider a native format for improved efficiency.

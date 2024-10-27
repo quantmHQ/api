@@ -5,6 +5,7 @@ package ctrlplane.auth.v1;
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
+// Represents an organization within the control plane.
 message Org {
   ctrlplane.common.v1.UUID id = 1;
   google.protobuf.Timestamp created_at = 2;
@@ -14,35 +15,40 @@ message Org {
   string slug = 6;
 }
 
+// Request to create a new organization.
 message CreateOrgRequest {
   string name = 1;
   string domain = 2;
   string slug = 3;
 }
 
-message CreateOrgResponse {
-  Org org = 1;
-}
+// Response containing the newly created organization.
+message CreateOrgResponse { Org org = 1; }
 
-message GetOrgByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
-}
+// Request to retrieve an organization by its unique identifier.
+message GetOrgByIDRequest { ctrlplane.common.v1.UUID id = 1; }
 
-message GetOrgByIDResponse {
-  Org org = 1;
-}
+// Response containing the retrieved organization.
+message GetOrgByIDResponse { Org org = 1; }
 
+// Request to update an existing organization.
 message UpdateOrgByIDRequest {
   string name = 1;
   string slug = 2;
 }
 
-message UpdateOrgByIDResponse {
-  Org org = 1;
-}
+// Response containing the updated organization.
+message UpdateOrgByIDResponse { Org org = 1; }
 
+// Service providing methods for managing organizations within the control
+// plane.
 service OrgService {
+  // Creates a new organization.
   rpc CreateOrg(CreateOrgRequest) returns (CreateOrgResponse);
+
+  // Retrieves an organization by its globally unique identifier.
   rpc GetOrgByID(GetOrgByIDRequest) returns (GetOrgByIDResponse);
+
+  // Updates an existing organization.
   rpc UpdateOrgByID(UpdateOrgByIDRequest) returns (UpdateOrgByIDResponse);
 }

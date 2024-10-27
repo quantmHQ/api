@@ -2,11 +2,12 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
-// User represents a user in the system. For security, the password is not
-// included in this message.
+import 'ctrlplane/common/v1/enum.proto';
+import "ctrlplane/common/v1/uuid.proto";
+
+// Represents a user account within the control plane.
 message User {
   ctrlplane.common.v1.UUID id = 1;
   google.protobuf.Timestamp created_at = 2;
@@ -19,6 +20,7 @@ message User {
   bool is_verified = 9;
 }
 
+// Request to create a new user account.
 message CreateUserRequest {
   string email = 1;
   string first_name = 2;
@@ -26,41 +28,54 @@ message CreateUserRequest {
   string domain = 4;
 }
 
-message CreateUserResponse {
-  User user = 1;
+// Response containing the newly created user account.
+message CreateUserResponse { User user = 1; }
+
+// Request to retrieve a user based on their external provider account.
+message GetUserByProviderAccountRequest {
+  ctrlplane.auth.v1.AccountProvider provider = 1;
+  string provider_id = 2;
 }
 
-message GetUserByEmailRequest {
-  string email = 1;
-}
+// Response containing the user retrieved by provider account.
+message GetUserByProviderAccountResponse { User user = 1; }
 
-message GetUserByEmailResponse {
-  User user = 1;
-}
+// Request to retrieve a user by their email address.
+message GetUserByEmailRequest { string email = 1; }
 
-message GetUserByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
-}
+// Response containing the user retrieved by email.
+message GetUserByEmailResponse { User user = 1; }
 
-message GetUserByIDResponse {
-  User user = 1;
-}
+// Request to retrieve a user by their unique identifier.
+message GetUserByIDRequest { ctrlplane.common.v1.UUID id = 1; }
 
-message UpdateUserRequest {
-  User user = 1;
-}
+// Response containing the user retrieved by ID.
+message GetUserByIDResponse { User user = 1; }
 
-message UpdateUserResponse {
-  User user = 1;
-}
+// Request to update an existing user account.
+message UpdateUserRequest { User user = 1; }
 
+// Response containing the updated user account.
+message UpdateUserResponse { User user = 1; }
+
+// Service providing methods for managing user accounts within the control
+// plane.
 service UserService {
-// CreateUser creates a new user, associating it with the given domain. Domains are unique to organizations.
-// If the domain is not registered, this method will create a new organization and assign the user to it.
+  // Creates a new user account associated with the given domain.
+  // Domains are unique to organizations. If the domain is not registered,
+  // a new organization will be created and the user assigned to it.
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 
+  // Retrieves a user by their email address.
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
+
+  // Retrieves a user by their globally unique identifier.
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
 
+  // Retrieves a user based on their external provider account.
+  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest)
+      returns (GetUserByProviderAccountResponse);
+
+  // Updates an existing user account.
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
 }

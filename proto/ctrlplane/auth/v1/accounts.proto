@@ -5,12 +5,16 @@ package ctrlplane.auth.v1;
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
+// Provider is an enum for the different types of authentication providers
+//
+// Deprecated: Use ctrlplane.auth.v1.AuthProvider instead.
 enum Provider {
   PROVIDER_UNSPECIFIED = 0;
   PROVIDER_GOOGLE = 1;
   PROVIDER_GITHUB = 2;
 }
 
+// Represents an external account associated with a user.
 message Account {
   ctrlplane.common.v1.UUID id = 1;
   google.protobuf.Timestamp created_at = 2;
@@ -19,26 +23,25 @@ message Account {
   Provider provider = 5;
   string provider_account_id = 6;
   google.protobuf.Timestamp expires_at = 7;
-  string kind = 8; // Using "kind" instead of "type" which is a reserved word
+  string kind = 8;
 }
 
+// Request to retrieve an account by its provider and identifier.
 message GetAccountByProviderAccountIDRequest {
   Provider provider = 1;
   string provider_account_id = 2;
 }
 
-message GetAccountByProviderAccountIDResponse {
-  Account account = 1;
-}
+// Response containing the account retrieved by provider and identifier.
+message GetAccountByProviderAccountIDResponse { Account account = 1; }
 
-message GetAccountsByUserIDRequest { // Pluralized for multiple accounts
-  ctrlplane.common.v1.UUID user_id = 1;
-}
+// Request to retrieve accounts associated with a specific user.
+message GetAccountsByUserIDRequest { ctrlplane.common.v1.UUID user_id = 1; }
 
-message GetAccountsByUserIDResponse { // Pluralized for multiple accounts
-  repeated Account accounts = 1; // Repeated field for multiple accounts
-}
+// Response containing the accounts associated with a user.
+message GetAccountsByUserIDResponse { repeated Account accounts = 1; }
 
+// Request to create a new external account.
 message CreateAccountRequest {
   ctrlplane.common.v1.UUID user_id = 1;
   Provider provider = 2;
@@ -47,21 +50,29 @@ message CreateAccountRequest {
   string kind = 5; // Using "kind" instead of "type"
 }
 
-message CreateAccountResponse {
-  Account account = 1;
-}
+// Response containing the newly created external account.
+message CreateAccountResponse { Account account = 1; }
 
-message GetAccountByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
-}
+// Request to retrieve an account by its unique identifier.
+message GetAccountByIDRequest { ctrlplane.common.v1.UUID id = 1; }
 
-message GetAccountByIDResponse {
-  Account account = 1;
-}
+// Response containing the account retrieved by ID.
+message GetAccountByIDResponse { Account account = 1; }
 
+// Service providing methods for managing external accounts within the control
+// plane.
 service AccountService {
-  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
-  rpc GetAccountsByUserID(GetAccountsByUserIDRequest) returns (GetAccountsByUserIDResponse); // Updated method signature
+  // Retrieves an account by its provider and identifier.
+  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest)
+      returns (GetAccountByProviderAccountIDResponse);
+
+  // Retrieves accounts associated with a specific user.
+  rpc GetAccountsByUserID(GetAccountsByUserIDRequest)
+      returns (GetAccountsByUserIDResponse);
+
+  // Creates a new external account.
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+
+  // Retrieves an account by its unique identifier.
   rpc GetAccountByID(GetAccountByIDRequest) returns (GetAccountByIDResponse);
 }
