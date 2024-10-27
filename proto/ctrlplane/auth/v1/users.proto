@@ -35,7 +35,7 @@ message CreateUserResponse {
 // Request to retrieve a user based on their external provider account.
 message GetUserByProviderAccountRequest {
   ctrlplane.common.v1.AuthProvider provider = 1;
-  string provider_id = 2;
+  string provider_account_id = 2;
 }
 
 // Response containing the user retrieved by provider account.
