@@ -4,10 +4,8 @@ package ctrlplane.common.v1;
 
 // Represents a universally unique identifier (UUID) as a string.
 //
-// A native 18-byte representation, conforming to RFC 4122 section 4.1.2, would
-// offer optimal performance in terms of size. However, it requires custom
-// serialization logic across platforms, making it impractical for current
-// needs.
+// A native 18-byte representation, conforming to RFC 4122 section 4.1.2, would offer optimal performance in terms of
+// size. However, it requires custom serialization logic across platforms, making it impractical for current needs.
 //
 // Native UUID representation (for future reference):
 //
@@ -20,12 +18,10 @@ package ctrlplane.common.v1;
 //    fixed64 node = 6;                      // 48 bits: The spatially unique node identifier.
 //   }
 //
-// This string representation provides universal compatibility and simpler
-// implementation at the cost of increased size. Future optimization may
-// consider a native format for improved efficiency.
+// This string representation provides universal compatibility and simpler implementation at the cost of increased size.
+// Future optimization may consider a native format for improved efficiency.
 //
-// See https://github.com/protocolbuffers/protobuf/issues/2224 for relevant
-// discussion.
+// See https://github.com/protocolbuffers/protobuf/issues/2224 for relevant discussion.
 message UUID {
-        string value = 1;
+  string value = 1;
 }

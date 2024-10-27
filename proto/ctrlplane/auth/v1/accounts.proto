@@ -71,8 +71,7 @@ message GetAccountByIDResponse {
   Account account = 1;
 }
 
-// Service providing methods for managing external accounts within the control
-// plane.
+// Service providing methods for managing external accounts within the control plane.
 service AccountService {
   // Retrieves an account by its provider and identifier.
   rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
