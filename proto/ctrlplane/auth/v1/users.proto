@@ -2,10 +2,9 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "google/protobuf/timestamp.proto";
-
-import 'ctrlplane/common/v1/enum.proto';
+import 'ctrlplane/common/v1/enums.proto';
 import "ctrlplane/common/v1/uuid.proto";
+import "google/protobuf/timestamp.proto";
 
 // Represents a user account within the control plane.
 message User {
@@ -29,34 +28,50 @@ message CreateUserRequest {
 }
 
 // Response containing the newly created user account.
-message CreateUserResponse { User user = 1; }
+message CreateUserResponse {
+  User user = 1;
+}
 
 // Request to retrieve a user based on their external provider account.
 message GetUserByProviderAccountRequest {
-  ctrlplane.auth.v1.AccountProvider provider = 1;
+  ctrlplane.common.v1.AuthProvider provider = 1;
   string provider_id = 2;
 }
 
 // Response containing the user retrieved by provider account.
-message GetUserByProviderAccountResponse { User user = 1; }
+message GetUserByProviderAccountResponse {
+  User user = 1;
+}
 
 // Request to retrieve a user by their email address.
-message GetUserByEmailRequest { string email = 1; }
+message GetUserByEmailRequest {
+  string email = 1;
+}
 
 // Response containing the user retrieved by email.
-message GetUserByEmailResponse { User user = 1; }
+message GetUserByEmailResponse {
+  User user = 1;
+}
 
 // Request to retrieve a user by their unique identifier.
-message GetUserByIDRequest { ctrlplane.common.v1.UUID id = 1; }
+message GetUserByIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
 
 // Response containing the user retrieved by ID.
-message GetUserByIDResponse { User user = 1; }
+message GetUserByIDResponse {
+  User user = 1;
+}
 
 // Request to update an existing user account.
-message UpdateUserRequest { User user = 1; }
+message UpdateUserRequest {
+  User user = 1;
+}
 
 // Response containing the updated user account.
-message UpdateUserResponse { User user = 1; }
+message UpdateUserResponse {
+  User user = 1;
+}
 
 // Service providing methods for managing user accounts within the control
 // plane.
@@ -66,15 +81,14 @@ service UserService {
   // a new organization will be created and the user assigned to it.
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 
+  // Retrieves a user based on their external provider account.
+  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest) returns (GetUserByProviderAccountResponse);
+
   // Retrieves a user by their email address.
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
 
   // Retrieves a user by their globally unique identifier.
   rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
-
-  // Retrieves a user based on their external provider account.
-  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest)
-      returns (GetUserByProviderAccountResponse);
 
   // Updates an existing user account.
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);

@@ -33,13 +33,19 @@ message GetAccountByProviderAccountIDRequest {
 }
 
 // Response containing the account retrieved by provider and identifier.
-message GetAccountByProviderAccountIDResponse { Account account = 1; }
+message GetAccountByProviderAccountIDResponse {
+  Account account = 1;
+}
 
 // Request to retrieve accounts associated with a specific user.
-message GetAccountsByUserIDRequest { ctrlplane.common.v1.UUID user_id = 1; }
+message GetAccountsByUserIDRequest {
+  ctrlplane.common.v1.UUID user_id = 1;
+}
 
 // Response containing the accounts associated with a user.
-message GetAccountsByUserIDResponse { repeated Account accounts = 1; }
+message GetAccountsByUserIDResponse {
+  repeated Account accounts = 1;
+}
 
 // Request to create a new external account.
 message CreateAccountRequest {
@@ -47,28 +53,32 @@ message CreateAccountRequest {
   Provider provider = 2;
   string provider_account_id = 3;
   google.protobuf.Timestamp expires_at = 4;
-  string kind = 5; // Using "kind" instead of "type"
+  string kind = 5;
 }
 
 // Response containing the newly created external account.
-message CreateAccountResponse { Account account = 1; }
+message CreateAccountResponse {
+  Account account = 1;
+}
 
 // Request to retrieve an account by its unique identifier.
-message GetAccountByIDRequest { ctrlplane.common.v1.UUID id = 1; }
+message GetAccountByIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
 
 // Response containing the account retrieved by ID.
-message GetAccountByIDResponse { Account account = 1; }
+message GetAccountByIDResponse {
+  Account account = 1;
+}
 
 // Service providing methods for managing external accounts within the control
 // plane.
 service AccountService {
   // Retrieves an account by its provider and identifier.
-  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest)
-      returns (GetAccountByProviderAccountIDResponse);
+  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
 
   // Retrieves accounts associated with a specific user.
-  rpc GetAccountsByUserID(GetAccountsByUserIDRequest)
-      returns (GetAccountsByUserIDResponse);
+  rpc GetAccountsByUserID(GetAccountsByUserIDRequest) returns (GetAccountsByUserIDResponse);
 
   // Creates a new external account.
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);

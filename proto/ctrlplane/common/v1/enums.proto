@@ -3,7 +3,7 @@ syntax = "proto3";
 package ctrlplane.common.v1;
 
 enum AuthProvider {
-  PROVIDER_UNSPECIFIED = 0;
-  PROVIDER_GOOGLE = 1;
-  PROVIDER_GITHUB = 2;
+  AUTH_PROVIDER_UNSPECIFIED = 0;
+  AUTH_PROVIDER_GOOGLE = 1;
+  AUTH_PROVIDER_GITHUB = 2;
 }

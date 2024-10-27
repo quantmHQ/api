@@ -23,13 +23,19 @@ message CreateOrgRequest {
 }
 
 // Response containing the newly created organization.
-message CreateOrgResponse { Org org = 1; }
+message CreateOrgResponse {
+  Org org = 1;
+}
 
 // Request to retrieve an organization by its unique identifier.
-message GetOrgByIDRequest { ctrlplane.common.v1.UUID id = 1; }
+message GetOrgByIDRequest {
+  ctrlplane.common.v1.UUID id = 1;
+}
 
 // Response containing the retrieved organization.
-message GetOrgByIDResponse { Org org = 1; }
+message GetOrgByIDResponse {
+  Org org = 1;
+}
 
 // Request to update an existing organization.
 message UpdateOrgByIDRequest {
@@ -38,7 +44,9 @@ message UpdateOrgByIDRequest {
 }
 
 // Response containing the updated organization.
-message UpdateOrgByIDResponse { Org org = 1; }
+message UpdateOrgByIDResponse {
+  Org org = 1;
+}
 
 // Service providing methods for managing organizations within the control
 // plane.
