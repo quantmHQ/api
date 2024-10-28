@@ -2,16 +2,16 @@ syntax = "proto3";
 
 package hooks.github.v1;
 
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents a core repo within the control plane.
 message GithubRepo {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
-  ctrlplane.common.v1.UUID repo_id = 4;
-  ctrlplane.common.v1.UUID installation_id = 5; // refenece to our database table named github_installations
+  string repo_id = 4;
+  // refenece to our database table named github_installations
+  string installation_id = 5;
   int64 github_id = 6;
   string name = 7;
   string full_name = 8;
@@ -24,8 +24,8 @@ message CreateGithubRepoRequest {
   string full_name = 2;
   string url = 3;
   bool is_active = 4;
-  ctrlplane.common.v1.UUID repo_id = 5;
-  ctrlplane.common.v1.UUID installation_id = 6;
+  string repo_id = 5;
+  string installation_id = 6;
 }
 
 message CreateGithubRepoResponse {

@@ -2,12 +2,11 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Team represents a team within an organization.
 message Team {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string name = 4;

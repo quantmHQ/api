@@ -6,15 +6,14 @@ import "ctrlplane/auth/v1/accounts.proto";
 import "ctrlplane/auth/v1/orgs.proto";
 import "ctrlplane/auth/v1/teams.proto";
 import "ctrlplane/common/v1/enums.proto";
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents a user account within the control plane.
 message User {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
-  ctrlplane.common.v1.UUID org_id = 4;
+  string org_id = 4;
   string email = 5;
   string first_name = 6;
   string last_name = 7;
@@ -69,7 +68,7 @@ message GetUserByEmailResponse {
 
 // Request to retrieve a user by their unique identifier.
 message GetUserByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
 }
 
 // Response containing the user retrieved by ID.

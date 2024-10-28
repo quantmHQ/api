@@ -2,22 +2,21 @@ syntax = "proto3";
 
 package ctrlplane.core.v1;
 
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents a core repo within the control plane.
 message Repo {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string name = 4;
-  string provider = 5;
+  string provider = 5; // TODO - implement hooks
   string provider_id = 6;
   string default_branch = 7;
   string is_monorepo = 8;
   string threshold = 9;
   string stale_duration = 10;
-  ctrlplane.common.v1.UUID org_id = 11;
+  string org_id = 11;
 }
 
 // Request to create a org's core repo.
@@ -29,7 +28,7 @@ message CreateRepoRequest {
   string is_monorepo = 5;
   string threshold = 6;
   string stale_duration = 7;
-  ctrlplane.common.v1.UUID org_id = 8;
+  string org_id = 8;
 }
 
 // Response containing org's core repo.

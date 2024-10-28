@@ -2,12 +2,11 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents an organization within the control plane.
 message Org {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string name = 4;
@@ -29,7 +28,7 @@ message CreateOrgResponse {
 
 // Request to retrieve an organization by its unique identifier.
 message GetOrgByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
 }
 
 // Response containing the retrieved organization.

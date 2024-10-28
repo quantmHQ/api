@@ -3,15 +3,14 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import "ctrlplane/common/v1/enums.proto";
-import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents an external account associated with a user.
 message Account {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
-  ctrlplane.common.v1.UUID user_id = 4;
+  string user_id = 4;
   ctrlplane.common.v1.AuthProvider provider = 5;
   string provider_account_id = 6;
   google.protobuf.Timestamp expires_at = 7;
@@ -31,7 +30,7 @@ message GetAccountByProviderAccountIDResponse {
 
 // Request to retrieve accounts associated with a specific user.
 message GetAccountsByUserIDRequest {
-  ctrlplane.common.v1.UUID user_id = 1;
+  string user_id = 1;
 }
 
 // Response containing the accounts associated with a user.
@@ -41,7 +40,7 @@ message GetAccountsByUserIDResponse {
 
 // Request to create a new external account.
 message CreateAccountRequest {
-  ctrlplane.common.v1.UUID user_id = 1;
+  string user_id = 1;
   ctrlplane.common.v1.AuthProvider provider = 2;
   string provider_account_id = 3;
   google.protobuf.Timestamp expires_at = 4;
@@ -55,7 +54,7 @@ message CreateAccountResponse {
 
 // Request to retrieve an account by its unique identifier.
 message GetAccountByIDRequest {
-  ctrlplane.common.v1.UUID id = 1;
+  string id = 1;
 }
 
 // Response containing the account retrieved by ID.
