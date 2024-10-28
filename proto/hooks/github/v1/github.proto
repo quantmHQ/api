@@ -4,7 +4,7 @@ package hooks.github.v1;
 
 import "google/protobuf/timestamp.proto";
 
-// Represents a core repo within the control plane.
+// Represents a provider's repo within the control plane.
 message GithubRepo {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
@@ -19,6 +19,7 @@ message GithubRepo {
   bool is_active = 10;
 }
 
+// Request to create a org's provider's repo.
 message CreateGithubRepoRequest {
   string name = 1;
   string full_name = 2;
@@ -28,11 +29,38 @@ message CreateGithubRepoRequest {
   string installation_id = 6;
 }
 
+// Response to get org's provider's repo.
 message CreateGithubRepoResponse {
+  GithubRepo github_repo = 1;
+}
+
+// Request to get org's provider's repo by id.
+message GetGithubRepoByIDRequest {
+  string id = 1;
+}
+
+// Response to get org's provider's repo.
+message GetGithubRepoByIDResponse {
+  GithubRepo github_repo = 1;
+}
+
+// Request to get org's provider's repo by name.
+message GetGithubRepoByNameRequest {
+  string name = 1;
+}
+
+// Response to get org's provider's repo.
+message GetGithubRepoByNameResponse {
   GithubRepo github_repo = 1;
 }
 
 service RepoService {
   // Create org's github provider repo.
   rpc CreateRepo(CreateGithubRepoRequest) returns (CreateGithubRepoResponse);
+
+  // Get org's github provider repo by id.
+  rpc GetGithubRepoByID(GetGithubRepoByIDRequest) returns (GetGithubRepoByIDResponse);
+
+  // Get org's github provider repo by name.
+  rpc GetGithubRepoByName(GetGithubRepoByNameRequest) returns (GetGithubRepoByNameResponse);
 }

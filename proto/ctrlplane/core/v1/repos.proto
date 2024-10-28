@@ -36,7 +36,33 @@ message CreateRepoResponse {
   Repo repo = 1;
 }
 
+// Request to get org's core repo by id.
+message GetRepoByIDRequest {
+  string id = 1;
+}
+
+// Response to get org's core repo.
+message GetRepoByIDResponse {
+  Repo repo = 1;
+}
+
+// Request to get org's core repo by org_id.
+message GetOrgReposByOrgIDRequest {
+  string org_id = 1;
+}
+
+// Response to get org's core repo.
+message GetOrgReposByOrgIDResponse {
+  Repo repo = 1;
+}
+
 service RepoService {
   // Create org's core repo.
   rpc CreateRepo(CreateRepoRequest) returns (CreateRepoResponse);
+
+  // Get org's core repo by id.
+  rpc GetRepoByID(GetRepoByIDRequest) returns (GetRepoByIDResponse);
+
+  // Get org's core repo by org_id.
+  rpc GetOrgReposByOrgID(GetOrgReposByOrgIDRequest) returns (GetOrgReposByOrgIDResponse);
 }
