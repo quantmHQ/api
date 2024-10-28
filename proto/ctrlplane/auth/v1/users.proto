@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import 'ctrlplane/auth/v1/accounts.proto';
-import 'ctrlplane/auth/v1/orgs.proto';
-import 'ctrlplane/auth/v1/teams.proto';
-import 'ctrlplane/common/v1/enums.proto';
+import "ctrlplane/auth/v1/accounts.proto";
+import "ctrlplane/auth/v1/orgs.proto";
+import "ctrlplane/auth/v1/teams.proto";
+import "ctrlplane/common/v1/enums.proto";
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
 

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package ctrlplane.core.v1;
+
+import "ctrlplane/common/v1/enums.proto";
+import "ctrlplane/common/v1/uuid.proto";
+import "google/protobuf/timestamp.proto";
+
+// Represents a core repo within the control plane.
+message Repo {
+  ctrlplane.common.v1.UUID id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  ctrlplane.common.v1.RepoProvider provider = 5;
+  string provider_id = 6;
+  string default_branch = 7;
+  string is_monorepo = 8;
+  string threshold = 9;
+  string stale_duration = 10;
+  ctrlplane.common.v1.UUID org_id = 11;
+}
+
+// Request to create a org's core repo.
+message CreateRepoRequest {
+  string name = 1;
+  ctrlplane.common.v1.RepoProvider provider = 2;
+  string provider_id = 3;
+  string default_branch = 4;
+  string is_monorepo = 5;
+  string threshold = 6;
+  string stale_duration = 7;
+  ctrlplane.common.v1.UUID org_id = 8;
+}
+
+// Response containing org's core repo.
+message CreateRepoResponse {
+  Repo repo = 1;
+}
+
+service RepoService {
+  // Create org's core repo.
+  rpc CreateRepo(CreateRepoRequest) returns (CreateRepoResponse);
+}
