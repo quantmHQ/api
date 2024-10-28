@@ -4,11 +4,12 @@ package ctrlplane.healthz.v1;
 
 import "google/protobuf/empty.proto";
 
-message HealthCheckResponse {
+message StatusResponse {
   bool database = 1;
   bool temporal = 2;
 }
 
 service HealthCheckService {
-  rpc Status(google.protobuf.Empty) returns (HealthCheckResponse);
+  // buf:lint:ignore RPCNamingConventions
+  rpc Status(google.protobuf.Empty) returns (StatusResponse);
 }

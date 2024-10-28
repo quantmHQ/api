@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
+import 'ctrlplane/auth/v1/accounts.proto';
+import 'ctrlplane/auth/v1/teams.proto';
+import 'ctrlplane/auth/v1/orgs.proto';
 import 'ctrlplane/common/v1/enums.proto';
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
@@ -17,6 +20,15 @@ message User {
   string last_name = 7;
   bool is_active = 8;
   bool is_verified = 9;
+}
+
+// Represents the authenticated user. This message is used to return the user
+// and associated accounts and teams.
+message AuthUser {
+  User user = 1;
+  ctrlplane.auth.v1.Org org = 4;
+  repeated ctrlplane.auth.v1.Account accounts = 2;
+  repeated ctrlplane.auth.v1.Team teams = 3;
 }
 
 // Request to create a new user account.
