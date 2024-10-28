@@ -93,7 +93,7 @@ service UserService {
   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 
   // Retrieves a user based on their external provider account.
-  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest) returns (GetUserByProviderAccountResponse);
+  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest) returns (AuthUser);
 
   // Retrieves a user by their email address.
   rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
