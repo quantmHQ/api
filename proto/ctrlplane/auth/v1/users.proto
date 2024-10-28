@@ -3,8 +3,8 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import 'ctrlplane/auth/v1/accounts.proto';
-import 'ctrlplane/auth/v1/teams.proto';
 import 'ctrlplane/auth/v1/orgs.proto';
+import 'ctrlplane/auth/v1/teams.proto';
 import 'ctrlplane/common/v1/enums.proto';
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";
@@ -18,8 +18,9 @@ message User {
   string email = 5;
   string first_name = 6;
   string last_name = 7;
-  bool is_active = 8;
-  bool is_verified = 9;
+  string picture = 8;
+  bool is_active = 9;
+  bool is_verified = 10;
 }
 
 // Represents the authenticated user. This message is used to return the user
@@ -37,6 +38,7 @@ message CreateUserRequest {
   string first_name = 2;
   string last_name = 3;
   string domain = 4;
+  string picture = 5;
 }
 
 // Response containing the newly created user account.
