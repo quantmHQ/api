@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ctrlplane.common.v1;
+
+import "ctrlplane/common/v1/enums.proto";
+
+message Hook {
+  ctrlplane.common.v1.HookType type = 1;
+  string name = 2;
+}

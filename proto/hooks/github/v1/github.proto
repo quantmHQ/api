@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package ctrlplane.providers.github.v1;
+package hooks.github.v1;
 
 import "ctrlplane/common/v1/uuid.proto";
 import "google/protobuf/timestamp.proto";

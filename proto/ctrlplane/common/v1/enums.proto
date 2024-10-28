@@ -8,8 +8,8 @@ enum AuthProvider {
   AUTH_PROVIDER_GITHUB = 2;
 }
 
-enum RepoProvider {
-  REPO_PROVIDER_UNSPECIFIED = 0;
-  REPO_PROVIDER_GITHUB = 1;
-  REPO_PROVIDER_GITLAB = 2;
+enum HookType {
+  HOOK_TYPE_UNSPECIFIED = 0;
+  HOOK_TYPE_REPO = 1;
+  HOOK_TYPE_MESSAGING = 2;
 }
