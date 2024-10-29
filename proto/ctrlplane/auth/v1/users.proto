@@ -16,7 +16,7 @@ message User {
   google.protobuf.Timestamp updated_at = 3;
   string org_id = 4 [(buf.validate.field).string.uuid = true];
   string email = 5 [(buf.validate.field).string.email = true];
-  string first_name = 6 [(buf.validate.field) = {required: true, min_len: 1}];
+  string first_name = 6 [(buf.validate.field).string = {min_len: 1}];
   string last_name = 7;
   string picture = 8;
   bool is_active = 9;
@@ -34,11 +34,11 @@ message AuthUser {
 
 // Request to create a new user account.
 message CreateUserRequest {
-  string email = 1;
-  string first_name = 2;
-  string last_name = 3;
-  string domain = 4;
-  string picture = 5;
+  string email = 1 [(buf.validate.field).string = {email: true}];
+  string first_name = 2 [(buf.validate.field).string = {min_len: 1}];
+  string last_name = 3 [(buf.validate.field).string = {min_len: 1}];
+  string domain = 4 [(buf.validate.field).string = {min_len: 1}];
+  string picture = 5 [(buf.validate.field).string = {uri: true}];
 }
 
 // Response containing the newly created user account.
