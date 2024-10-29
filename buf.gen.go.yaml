@@ -5,16 +5,6 @@ managed:
     - file_option: go_package_prefix
       value: go.breu.io/quantm/internal/proto
 
-breaking:
-  - rules:
-      - idToID:
-        description: Convert id to ID
-        match:
-          - type: "FIELD"
-          - name: "id"
-        replace:
-          - name: "ID"
-
 plugins:
   # go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
   - local: protoc-gen-connect-go

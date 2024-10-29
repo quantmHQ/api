@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Permission is a reousrce and a list of actions that can be performed on that resource
+message Permission {
+  string resource = 1;
+  repeated string action = 2;
+}
+
+message Role {
+  string name = 1;
+  repeated Permission permissions = 2;
+}
