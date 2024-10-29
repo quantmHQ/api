@@ -20,7 +20,7 @@ import "google/protobuf/timestamp.proto";
 // - repos
 // - hooks
 //
-// We also have a special resource called "all" that can be used to gran permissions
+// We also have a special resource called "all" that can be used to grant permissions
 // on all resources within an organization. This will be enforced by a hardcoded
 // json file that will be loaded at startup. This is a temporary solution until
 // we have a more robust permission system.
