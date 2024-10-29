@@ -9,8 +9,7 @@ message GithubRepo {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
-  string repo_id = 4;
-  // refenece to our database table named github_installations
+  string repo_id = 4; // Refers to the core repo
   string installation_id = 5;
   int64 github_id = 6;
   string name = 7;

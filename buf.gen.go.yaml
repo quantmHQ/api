@@ -3,13 +3,24 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: go.breu.io/quantm/internal/nomad/proto
+      value: go.breu.io/quantm/internal/proto
+
+breaking:
+  - rules:
+      - idToID:
+        description: Convert id to ID
+        match:
+          - type: "FIELD"
+          - name: "id"
+        replace:
+          - name: "ID"
+
 plugins:
   # go install connectrpc.com/connect/cmd/protoc-gen-connect-go@latest
   - local: protoc-gen-connect-go
     include_imports: true
     include_wkt: false
-    out: ../internal/nomad/proto
+    out: ../internal/proto
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
@@ -18,6 +29,6 @@ plugins:
   - local: protoc-gen-go
     include_imports: true
     include_wkt: false
-    out: ../internal/nomad/proto
+    out: ../internal/proto
     opt:
       - paths=source_relative
