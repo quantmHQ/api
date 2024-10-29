@@ -3,6 +3,7 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 // Permission is a reousrce and a list of actions that can be performed on that resource.
 // Our system has a fixed number of resources and actions that can be performed on them.
@@ -26,7 +27,8 @@ import "google/protobuf/timestamp.proto";
 // we have a more robust permission system.
 message Permission {
   string resource = 1;
-  repeated string action = 2;
+
+  repeated string actions = 2 [(buf.validate.field).repeated = { min_items: 1, unique: true, items: { string: { in: ["read", "write"]}} }];
 }
 
 // Role is a named collection of permissions. For ease of use, currently
