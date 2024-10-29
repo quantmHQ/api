@@ -4,12 +4,60 @@ package ctrlplane.auth.v1;
 
 import "google/protobuf/timestamp.proto";
 
-// Permission is a reousrce and a list of actions that can be performed on that resource
+// Permission is a reousrce and a list of actions that can be performed on that resource.
+// Our system has a fixed number of resources and actions that can be performed on them.
+//
+// The actions are
+//
+// - read
+// - write
+//
+// The resources are
+//
+// - orgs
+// - teams
+// - users
+// - repos
+// - hooks
+//
+// We also have a special resource called "all" that can be used to gran permissions
+// on all resources within an organization. This will be enforced by a hardcoded
+// json file that will be loaded at startup. This is a temporary solution until
+// we have a more robust permission system.
 message Permission {
   string resource = 1;
   repeated string action = 2;
 }
 
+// Role is a named collection of permissions. For ease of use, currently
+// we only support one role per user. This may change in the future.
+// We also have two roles that are built in: "admin" and "user".
+//
+// [
+//   {
+//     "name": "admin",
+//     "permissions": [
+//       {
+//         "resource": "all",
+//         "action": [
+//           "read",
+//           "write"
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     "name": "member",
+//     "permissions": [
+//       {
+//         "resource": "all",
+//         "action": [
+//           "read",
+//         ]
+//       }
+//     ]
+//   }
+// ]
 message Role {
   string name = 1;
   repeated Permission permissions = 2;
