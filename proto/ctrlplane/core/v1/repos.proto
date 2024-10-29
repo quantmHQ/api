@@ -13,8 +13,8 @@ message Repo {
   string provider = 5; // TODO - implement hooks
   string provider_id = 6;
   string default_branch = 7;
-  string is_monorepo = 8;
-  string threshold = 9;
+  bool is_monorepo = 8;
+  int32 threshold = 9;
   string stale_duration = 10;
   string org_id = 11;
 }
@@ -25,8 +25,8 @@ message CreateRepoRequest {
   string provider = 2;
   string provider_id = 3;
   string default_branch = 4;
-  string is_monorepo = 5;
-  string threshold = 6;
+  bool is_monorepo = 5;
+  int32 threshold = 6;
   string stale_duration = 7;
   string org_id = 8;
 }
