@@ -7,15 +7,16 @@ import "ctrlplane/auth/v1/orgs.proto";
 import "ctrlplane/auth/v1/teams.proto";
 import "ctrlplane/common/v1/enums.proto";
 import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
 
 // Represents a user account within the control plane.
 message User {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
-  string org_id = 4;
-  string email = 5;
-  string first_name = 6;
+  string org_id = 4 [(buf.validate.field).string.uuid = true];
+  string email = 5 [(buf.validate.field).string.email = true];
+  string first_name = 6 [(buf.validate.field) = {required: true, min_len: 1}];
   string last_name = 7;
   string picture = 8;
   bool is_active = 9;
