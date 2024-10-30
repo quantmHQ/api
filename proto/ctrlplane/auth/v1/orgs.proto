@@ -3,6 +3,12 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import "google/protobuf/timestamp.proto";
+import 'ctrlplane/common/v1/enums.proto';
+
+message OrgHooks {
+  ctrlplane.common.v1.RepoHook repo = 1;
+  ctrlplane.common.v1.MessagingHook messaging = 2;
+}
 
 // Represents an organization within the control plane.
 message Org {
@@ -12,6 +18,7 @@ message Org {
   string name = 4;
   string domain = 5;
   string slug = 6;
+  OrgHooks hooks = 7;
 }
 
 // Request to create a new organization.
