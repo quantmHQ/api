@@ -2,8 +2,17 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "google/protobuf/timestamp.proto";
 import "buf/validate/validate.proto";
+import "google/protobuf/timestamp.proto";
+
+enum Resource {
+  ALL = 0; // Special resource that grants permissions on all resources
+  ORGS = 1; // Organizations
+  TEAMS = 2; // Teams
+  USERS = 3; // Users
+  REPOS = 4; // Repositories
+  HOOKS = 5; // Integration hooks
+}
 
 // Permission is a reousrce and a list of actions that can be performed on that resource.
 // Our system has a fixed number of resources and actions that can be performed on them.
@@ -26,9 +35,20 @@ import "buf/validate/validate.proto";
 // json file that will be loaded at startup. This is a temporary solution until
 // we have a more robust permission system.
 message Permission {
-  string resource = 1;
+  Resource resource = 1;
 
-  repeated string actions = 2 [(buf.validate.field).repeated = { min_items: 1, unique: true, items: { string: { in: ["read", "write"]}} }];
+  repeated string actions = 2 [(buf.validate.field).repeated = {
+    min_items: 1
+    unique: true
+    items: {
+      string: {
+        in: [
+          "read",
+          "write"
+        ]
+      }
+    }
+  }];
 }
 
 // Role is a named collection of permissions. For ease of use, currently

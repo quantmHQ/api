@@ -27,9 +27,10 @@ message User {
 // and associated accounts and teams.
 message AuthUser {
   User user = 1;
-  ctrlplane.auth.v1.Org org = 4;
-  repeated ctrlplane.auth.v1.Account accounts = 2;
-  repeated ctrlplane.auth.v1.Team teams = 3;
+  ctrlplane.auth.v1.Org org = 2;
+  repeated string roles = 3;
+  repeated ctrlplane.auth.v1.Account accounts = 4;
+  repeated ctrlplane.auth.v1.Team teams = 5;
 }
 
 // Request to create a new user account.
@@ -92,16 +93,16 @@ message UpdateUserResponse {
 service UserService {
   // Creates a new user account associated with the given domain. Domains are unique to organizations. If the domain is
   // not registered, a new organization will be created and the user assigned to it.
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc CreateUser(CreateUserRequest) returns (AuthUser);
 
   // Retrieves a user based on their external provider account.
   rpc GetUserByProviderAccount(GetUserByProviderAccountRequest) returns (AuthUser);
 
   // Retrieves a user by their email address.
-  rpc GetUserByEmail(GetUserByEmailRequest) returns (GetUserByEmailResponse);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (AuthUser);
 
   // Retrieves a user by their globally unique identifier.
-  rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
+  rpc GetUserByID(GetUserByIDRequest) returns (AuthUser);
 
   // Updates an existing user account.
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
