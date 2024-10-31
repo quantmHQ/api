@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package hooks.github.v1;
 
+import 'google/protobuf/empty.proto';
 import "google/protobuf/timestamp.proto";
 
 enum GithubInstallSetupAction {
@@ -58,7 +59,7 @@ message GetGithubRepoByNameResponse {
   GithubRepo github_repo = 1;
 }
 
-message GithubInstallequest {
+message GithubInstallRequest {
   int64 installation_id = 1;
   GithubInstallSetupAction action = 2;
   string org_id = 3;
