@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
+import "ctrlplane/common/v1/enums.proto";
 import "google/protobuf/timestamp.proto";
-import 'ctrlplane/common/v1/enums.proto';
 
 message OrgHooks {
   ctrlplane.common.v1.RepoHook repo = 1;
