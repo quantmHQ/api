@@ -8,11 +8,11 @@ import "google/protobuf/timestamp.proto";
 
 message GithubInstallRequest {
   int64 installation_id = 1;
-  ctrlplane.common.v1.SetupAction action = 2;
+  ctrlplane.common.v1.GithubSetupAction action = 2;
   string org_id = 3;
 }
 
-service GithubRepoService {
+service GithubService {
   // complete installation github app hook.
   rpc GithubInstall(GithubInstallRequest) returns (google.protobuf.Empty);
 }
