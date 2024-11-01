@@ -2,13 +2,22 @@ syntax = "proto3";
 
 package hooks.github.v1;
 
-import "ctrlplane/common/v1/enums.proto";
 import "google/protobuf/empty.proto";
-import "google/protobuf/timestamp.proto";
+
+enum SetupAction {
+  UNSPECIFIED = 0;
+  INSTALL = 1;
+  UPDATE = 2;
+  DELETE = 3;
+  REQUEST = 4;
+  SUSPEND = 5;
+  UNSUSPEND = 6;
+  NEW_PERMISSIONS_ACCEPTED = 7;
+}
 
 message GithubInstallRequest {
   int64 installation_id = 1;
-  ctrlplane.common.v1.GithubSetupAction action = 2;
+  SetupAction action = 2;
   string org_id = 3;
 }
 

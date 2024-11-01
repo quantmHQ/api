@@ -3,15 +3,15 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import "buf/validate/validate.proto";
-import "google/protobuf/timestamp.proto";
 
 enum Resource {
-  ALL = 0; // Special resource that grants permissions on all resources
-  ORGS = 1; // Organizations
-  TEAMS = 2; // Teams
-  USERS = 3; // Users
-  REPOS = 4; // Repositories
-  HOOKS = 5; // Integration hooks
+  UNSPECIFIED = 0;
+  ALL = 1; // All is a special resource
+  ORGS = 2; // Organizations
+  TEAMS = 3; // Teams
+  USERS = 4; // Users
+  REPOS = 5; // Repositories
+  HOOKS = 6; // Integration hooks
 }
 
 // Permission is a reousrce and a list of actions that can be performed on that resource.
