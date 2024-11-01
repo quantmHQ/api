@@ -15,7 +15,7 @@ enum SetupAction {
   NEW_PERMISSIONS_ACCEPTED = 7;
 }
 
-message GithubInstallRequest {
+message InstallRequest {
   int64 installation_id = 1;
   SetupAction action = 2;
   string org_id = 3;
@@ -23,5 +23,5 @@ message GithubInstallRequest {
 
 service GithubService {
   // complete installation github app hook.
-  rpc GithubInstall(GithubInstallRequest) returns (google.protobuf.Empty);
+  rpc Install(InstallRequest) returns (google.protobuf.Empty);
 }
