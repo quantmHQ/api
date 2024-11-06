@@ -3,6 +3,7 @@ syntax = "proto3";
 package ctrlplane.auth.v1;
 
 import "ctrlplane/common/v1/enums.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 message OrgHooks {
@@ -43,15 +44,9 @@ message GetOrgByIDResponse {
   Org org = 1;
 }
 
-// Request to update an existing organization.
-message UpdateOrgByIDRequest {
-  string name = 1;
-  string slug = 2;
-}
-
-// Response containing the updated organization.
-message UpdateOrgByIDResponse {
-  Org org = 1;
+message SetOrgHooksRequest {
+  string org_id = 1;
+  OrgHooks hooks = 2;
 }
 
 // Service providing methods for managing organizations within the control
@@ -63,6 +58,5 @@ service OrgService {
   // Retrieves an organization by its globally unique identifier.
   rpc GetOrgByID(GetOrgByIDRequest) returns (GetOrgByIDResponse);
 
-  // Updates an existing organization.
-  rpc UpdateOrgByID(UpdateOrgByIDRequest) returns (UpdateOrgByIDResponse);
+  rpc SetOrgHooks(SetOrgHooksRequest) returns (google.protobuf.Empty);
 }
