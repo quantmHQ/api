@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package ctrlplane.core.v1;
 
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents a core repo within the control plane.
@@ -15,7 +16,7 @@ message Repo {
   string default_branch = 7;
   bool is_monorepo = 8;
   int32 threshold = 9;
-  string stale_duration = 10;
+  google.protobuf.Duration stale_duration = 10;
   string org_id = 11;
 }
 
@@ -27,7 +28,7 @@ message CreateRepoRequest {
   string default_branch = 4;
   bool is_monorepo = 5;
   int32 threshold = 6;
-  string stale_duration = 7;
+  google.protobuf.Duration stale_duration = 7;
   string org_id = 8;
 }
 
