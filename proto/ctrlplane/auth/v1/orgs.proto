@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
-import "ctrlplane/common/v1/enums.proto";
+import "ctrlplane/events/v1/hooks.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 // OrgHooks contains the status of the hooks for an organization.
 message OrgHooks {
-  ctrlplane.common.v1.RepoHook repo = 1;
-  ctrlplane.common.v1.MessagingHook messaging = 2;
+  ctrlplane.events.v1.RepoHook repo = 1;
+  ctrlplane.events.v1.MessagingHook messaging = 2;
 }
 
 // Represents an organization within the control plane.

@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
+import "buf/validate/validate.proto";
 import "ctrlplane/auth/v1/accounts.proto";
+import "ctrlplane/auth/v1/enums.proto";
 import "ctrlplane/auth/v1/orgs.proto";
 import "ctrlplane/auth/v1/teams.proto";
-import "ctrlplane/common/v1/enums.proto";
 import "google/protobuf/timestamp.proto";
-import "buf/validate/validate.proto";
 
 // Represents a user account within the control plane.
 message User {
@@ -49,7 +49,7 @@ message CreateUserResponse {
 
 // Request to retrieve a user based on their external provider account.
 message GetUserByProviderAccountRequest {
-  ctrlplane.common.v1.AuthProvider provider = 1;
+  ctrlplane.auth.v1.AuthProvider provider = 1;
   string provider_account_id = 2;
 }
 

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+enum AuthProvider {
+  AUTH_PROVIDER_UNSPECIFIED = 0;
+  AUTH_PROVIDER_GOOGLE = 1;
+  AUTH_PROVIDER_GITHUB = 2;
+}
