@@ -3,6 +3,7 @@ syntax = "proto3";
 package ctrlplane.core.v1;
 
 import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 // Represents a core repo within the control plane.
@@ -57,6 +58,10 @@ message GetOrgReposByOrgIDResponse {
   Repo repo = 1;
 }
 
+message ListReposResponse {
+  repeated Repo repos = 1;
+}
+
 service RepoService {
   // Create org's core repo.
   rpc CreateRepo(CreateRepoRequest) returns (CreateRepoResponse);
@@ -66,4 +71,7 @@ service RepoService {
 
   // Get org's core repo by org_id.
   rpc GetOrgReposByOrgID(GetOrgReposByOrgIDRequest) returns (GetOrgReposByOrgIDResponse);
+
+  // List all org's repos.
+  rpc ListRepos(google.protobuf.Empty) returns (ListReposResponse);
 }
