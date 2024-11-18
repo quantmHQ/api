@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package hooks.slack.v1;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/empty.proto";
+
+message SlackOauthRequest {
+  string code = 1;
+  string kind = 2;
+  string link_to = 6 [(buf.validate.field).string.uuid = true];
+}
+
+service SlackService {
+  rpc SlackOauth(SlackOauthRequest) returns (google.protobuf.Empty);
+}
