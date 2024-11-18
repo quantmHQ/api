@@ -27,7 +27,7 @@ message Repo {
 // Request to create a org's core repo.
 message CreateRepoRequest {
   string name = 1;
-  string hook = 2;
+  ctrlplane.events.v1.RepoHook hook = 2;
   string hook_id = 3;
   string default_branch = 4;
   bool is_monorepo = 5;
