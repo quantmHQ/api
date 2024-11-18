@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package ctrlplane.core.v1;
 
+import "ctrlplane/events/v1/hooks.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
@@ -13,7 +14,7 @@ message Repo {
   google.protobuf.Timestamp updated_at = 3;
   string org_id = 4;
   string name = 5;
-  string hook = 6;
+  ctrlplane.events.v1.RepoHook hook = 6;
   string hook_id = 7;
   string default_branch = 8;
   bool is_monorepo = 9;
