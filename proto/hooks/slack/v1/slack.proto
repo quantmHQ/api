@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 message SlackOauthRequest {
   string code = 1;
   string kind = 2;
-  string link_to = 6 [(buf.validate.field).string.uuid = true];
+  string link_to = 3 [(buf.validate.field).string.uuid = true];
 }
 
 service SlackService {
