@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+message DiffFiles {
+  repeated string added = 1;
+  repeated string deleted = 2;
+  repeated string modified = 3;
+  repeated string renamed = 4;
+}
+
+message DiffLines {
+  int32 added = 1;
+  int32 removed = 2;
+}
+
+message Diff {
+  DiffFiles files = 1;
+  DiffLines lines = 2;
+}

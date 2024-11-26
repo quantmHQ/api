@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package ctrlplane.events.v1;
 
-import "google/protobuf/timestamp.proto";
-
 message Author {
   string name = 1;
   string email = 2;
