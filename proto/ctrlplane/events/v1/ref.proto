@@ -3,6 +3,8 @@ syntax = "proto3";
 package ctrlplane.events.v1;
 
 // GitRef is a reference to a git branch or tag.
+//
 message GitRef {
   string ref = 1;
+  string kink = 2;
 }
