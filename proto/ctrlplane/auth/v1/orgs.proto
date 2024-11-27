@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 // OrgHooks contains the status of the hooks for an organization.
 message OrgHooks {
   ctrlplane.events.v1.RepoHook repo = 1;
-  ctrlplane.events.v1.MessagingHook messaging = 2;
+  ctrlplane.events.v1.ChatHook chat = 2;
 }
 
 // Represents an organization within the control plane.

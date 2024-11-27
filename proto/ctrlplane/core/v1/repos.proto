@@ -61,7 +61,7 @@ message GetOrgReposByOrgIDResponse {
   Repo repo = 1;
 }
 
-message RepoHasMesging {
+message RepoExtended {
   string id = 1;
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
@@ -79,7 +79,7 @@ message RepoHasMesging {
 }
 
 message ListReposResponse {
-  repeated RepoHasMesging repo_has_mesgings = 1;
+  repeated RepoExtended repos = 1;
 }
 
 service RepoService {

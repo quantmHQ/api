@@ -5,12 +5,18 @@ package hooks.slack.v1;
 import "buf/validate/validate.proto";
 import "google/protobuf/empty.proto";
 
-message SlackOauthRequest {
+message OauthRequest {
   string code = 1;
   string kind = 2;
   string link_to = 3 [(buf.validate.field).string.uuid = true];
 }
 
+// @ysf - we might need a db entity for this. just like we have for github
+message Install {
+  string workspace_id = 1;
+  string workspace_name = 2;
+}
+
 service SlackService {
-  rpc SlackOauth(SlackOauthRequest) returns (google.protobuf.Empty);
+  rpc Oauth(OauthRequest) returns (google.protobuf.Empty);
 }
