@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ctrlplane.core.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Messaging {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  int32 hook = 4;
+  string kind = 5;
+  string link_to = 6;
+  bytes data = 7;
+}

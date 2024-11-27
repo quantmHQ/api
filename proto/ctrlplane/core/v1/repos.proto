@@ -63,6 +63,7 @@ message GetOrgReposByOrgIDResponse {
 
 message ListReposResponse {
   repeated Repo repos = 1;
+  repeated Messaging messaging = 2;
 }
 
 service RepoService {
