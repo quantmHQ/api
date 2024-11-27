@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package ctrlplane.core.v1;
 
+import "ctrlplane/core/v1/messaging.proto";
 import "ctrlplane/events/v1/hooks.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
