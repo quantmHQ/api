@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package ctrlplane.core.v1;
 
-import "ctrlplane/core/v1/messaging.proto";
 import "ctrlplane/events/v1/hooks.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
@@ -62,13 +61,25 @@ message GetOrgReposByOrgIDResponse {
   Repo repo = 1;
 }
 
-message Meta {
-  Repo repo = 1;
-  Messaging messaging = 2;
+message RepoHasMesging {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string org_id = 4;
+  string name = 5;
+  ctrlplane.events.v1.RepoHook hook = 6;
+  string hook_id = 7;
+  string default_branch = 8;
+  bool is_monorepo = 9;
+  int32 threshold = 10;
+  google.protobuf.Duration stale_duration = 11;
+  string url = 12;
+  bool is_active = 13;
+  bool has_mesging = 14;
 }
 
 message ListReposResponse {
-  repeated Meta meta = 1;
+  repeated RepoHasMesging repo_has_mesgings = 1;
 }
 
 service RepoService {
