@@ -75,7 +75,7 @@ message RepoExtended {
   google.protobuf.Duration stale_duration = 11;
   string url = 12;
   bool is_active = 13;
-  bool has_mesging = 14;
+  bool chat_enabled = 14;
 }
 
 message ListReposResponse {
