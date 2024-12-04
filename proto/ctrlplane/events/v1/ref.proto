@@ -6,5 +6,5 @@ package ctrlplane.events.v1;
 //
 message GitRef {
   string ref = 1;
-  string kink = 2;
+  string kind = 2;
 }
