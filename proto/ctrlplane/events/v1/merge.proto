@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+message Merge {
+  string head_branch = 1;
+  string head_commit = 2;
+  string base_branch = 3;
+  string base_commit = 4;
+}
