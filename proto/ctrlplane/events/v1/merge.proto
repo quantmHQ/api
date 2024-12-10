@@ -2,9 +2,12 @@ syntax = "proto3";
 
 package ctrlplane.events.v1;
 
+import "ctrlplane/events/v1/commit.proto";
+
 message Merge {
   string head_branch = 1;
-  string head_commit = 2;
+  Commit head_commit = 2;
   string base_branch = 3;
-  string base_commit = 4;
+  Commit base_commit = 4;
+  repeated string files = 5; 
 }
