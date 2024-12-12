@@ -14,7 +14,16 @@ message DiffLines {
   int32 removed = 2;
 }
 
+message DiffCommits {
+  string base = 1;
+  string head = 2;
+  string conflict_at = 3;
+}
+
 message Diff {
   DiffFiles files = 1;
   DiffLines lines = 2;
+  DiffCommits commits = 3;
+  string patch = 4;
+  bool has_conflict = 5;
 }
