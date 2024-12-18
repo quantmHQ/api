@@ -9,6 +9,6 @@ message PullRequestReview {
   int64 pull_request_number = 2;    
   string branch = 3;                  
   string state = 4;                   
-  int64 author_id = 5;               
+  string author_email = 5;               
   google.protobuf.Timestamp submitted_at = 6;
 }
