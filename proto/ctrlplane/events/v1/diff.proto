@@ -2,11 +2,16 @@ syntax = "proto3";
 
 package ctrlplane.events.v1;
 
+message RenamedFile {
+  string old = 1;
+  string new = 2;
+}
+
 message DiffFiles {
   repeated string added = 1;
   repeated string deleted = 2;
   repeated string modified = 3;
-  repeated string renamed = 4;
+  repeated RenamedFile renamed = 4;
 }
 
 message DiffLines {
