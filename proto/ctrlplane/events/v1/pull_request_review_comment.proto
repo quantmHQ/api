@@ -8,12 +8,11 @@ message PullRequestReviewComment {
   int64 id = 1;                       
   int64 pull_request_number = 2;    
   string branch = 3;                  
-  string state = 4;                   
-  int64 review_id = 5;
-  int64 in_reply_to = 6;
-  string commit_sha = 7;
-  string path = 8;
-  int64 position = 9;
-  string author_email = 10;               
-  google.protobuf.Timestamp submitted_at =11;
+  string state = 4;
+  int64 in_reply_to = 5;
+  string commit_sha = 6;
+  string path = 7;
+  int64 position = 8;
+  string author_email = 9;               
+  google.protobuf.Timestamp submitted_at =10;
 }
