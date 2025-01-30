@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+import "ctrlplane/events/v1/commit.proto";
+import "google/protobuf/timestamp.proto";
+
+message Merge {
+  string head_branch = 1;
+  Commit head_commit = 2;
+  string base_branch = 3;
+  Commit base_commit = 4;
+  repeated string files = 5;
+}
+
+message MergeQueue {
+  int64 number = 1;
+  string branch = 2;
+  bool is_priority = 3;
+  google.protobuf.Timestamp timestamp = 4;
+}

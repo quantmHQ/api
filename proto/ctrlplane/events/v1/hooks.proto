@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+enum RepoHook {
+  REPO_HOOK_UNSPECIFIED = 0;
+  REPO_HOOK_GITHUB = 1001;
+  REPO_HOOK_GITLAB = 1002;
+}
+
+enum ChatHook {
+  CHAT_HOOK_UNSPECIFIED = 0;
+  CHAT_HOOK_SLACK = 2001;
+  CHAT_HOOK_TEAMS = 2002;
+}

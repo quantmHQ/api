@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+message RenamedFile {
+  string old = 1;
+  string new = 2;
+}
+
+message DiffFiles {
+  repeated string added = 1;
+  repeated string deleted = 2;
+  repeated string modified = 3;
+  repeated RenamedFile renamed = 4;
+}
+
+message DiffLines {
+  int32 added = 1;
+  int32 removed = 2;
+}
+
+message DiffCommits {
+  string base = 1;
+  string head = 2;
+  string conflict_at = 3;
+}
+
+message Diff {
+  DiffFiles files = 1;
+  DiffLines lines = 2;
+  DiffCommits commits = 3;
+  string patch = 4;
+  bool has_conflict = 5;
+}

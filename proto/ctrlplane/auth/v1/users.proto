@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "buf/validate/validate.proto";
+import "ctrlplane/auth/v1/accounts.proto";
+import "ctrlplane/auth/v1/enums.proto";
+import "ctrlplane/auth/v1/orgs.proto";
+import "ctrlplane/auth/v1/teams.proto";
+import "google/protobuf/timestamp.proto";
+
+// Represents a user account within the control plane.
+message User {
+  string id = 1 [(buf.validate.field).string.uuid = true];
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string org_id = 4 [(buf.validate.field).string.uuid = true];
+  string email = 5 [(buf.validate.field).string.email = true];
+  string first_name = 6 [(buf.validate.field).string = {min_len: 1}];
+  string last_name = 7;
+  string picture = 8;
+  bool is_active = 9;
+  bool is_verified = 10;
+}
+
+// Represents the authenticated user. This message is used to return the user
+// and associated accounts and teams.
+message AuthUser {
+  User user = 1;
+  ctrlplane.auth.v1.Org org = 2;
+  repeated string roles = 3;
+  repeated ctrlplane.auth.v1.Account accounts = 4;
+  repeated ctrlplane.auth.v1.Team teams = 5;
+}
+
+// Request to create a new user account.
+message CreateUserRequest {
+  string email = 1 [(buf.validate.field).string = {email: true}];
+  string first_name = 2 [(buf.validate.field).string = {min_len: 1}];
+  string last_name = 3 [(buf.validate.field).string = {min_len: 1}];
+  string domain = 4 [(buf.validate.field).string = {min_len: 1}];
+  string picture = 5 [(buf.validate.field).string = {uri: true}];
+}
+
+// Response containing the newly created user account.
+message CreateUserResponse {
+  User user = 1;
+}
+
+// Request to retrieve a user based on their external provider account.
+message GetUserByProviderAccountRequest {
+  ctrlplane.auth.v1.AuthProvider provider = 1;
+  string provider_account_id = 2;
+}
+
+// Response containing the user retrieved by provider account.
+message GetUserByProviderAccountResponse {
+  User user = 1;
+}
+
+// Request to retrieve a user by their email address.
+message GetUserByEmailRequest {
+  string email = 1;
+}
+
+// Response containing the user retrieved by email.
+message GetUserByEmailResponse {
+  User user = 1;
+}
+
+// Request to retrieve a user by their unique identifier.
+message GetUserByIDRequest {
+  string id = 1;
+}
+
+// Response containing the user retrieved by ID.
+message GetUserByIDResponse {
+  User user = 1;
+}
+
+// Request to update an existing user account.
+message UpdateUserRequest {
+  User user = 1;
+}
+
+// Response containing the updated user account.
+message UpdateUserResponse {
+  User user = 1;
+}
+
+// Service providing methods for managing user accounts within the control
+// plane.
+service UserService {
+  // Creates a new user account associated with the given domain. Domains are unique to organizations. If the domain is
+  // not registered, a new organization will be created and the user assigned to it.
+  rpc CreateUser(CreateUserRequest) returns (AuthUser);
+
+  // Retrieves a user based on their external provider account.
+  rpc GetUserByProviderAccount(GetUserByProviderAccountRequest) returns (AuthUser);
+
+  // Retrieves a user by their email address.
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (AuthUser);
+
+  // Retrieves a user by their globally unique identifier.
+  rpc GetUserByID(GetUserByIDRequest) returns (AuthUser);
+
+  // Updates an existing user account.
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+}

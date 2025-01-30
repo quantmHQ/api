@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "google/protobuf/timestamp.proto";
+
+// Team represents a team within an organization.
+message Team {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string name = 4;
+  string slug = 5;
+}
+
+// CreateTeamRequest represents a request to create a new team.
+message CreateTeamRequest {
+  string name = 1;
+  string org_id = 2;
+}
+
+// CreateTeamResponse represents a response to a create team request.
+message CreateTeamResponse {
+  Team team = 1;
+}
+
+// TeamService provides methods for managing teams.
+service TeamService {
+  // CreateTeam creates a new team.
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse);
+}

@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package ctrlplane.core.v1;
+
+import "ctrlplane/events/v1/hooks.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// Represents repo within the control plane.
+message Repo {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string org_id = 4;
+  string name = 5;
+  ctrlplane.events.v1.RepoHook hook = 6;
+  string hook_id = 7;
+  string default_branch = 8;
+  bool is_monorepo = 9;
+  int32 threshold = 10;
+  google.protobuf.Duration stale_duration = 11;
+  string url = 12;
+  bool is_active = 13;
+}
+
+// Request to create a org's core repo.
+message CreateRepoRequest {
+  string name = 1;
+  ctrlplane.events.v1.RepoHook hook = 2;
+  string hook_id = 3;
+  string default_branch = 4;
+  bool is_monorepo = 5;
+  int32 threshold = 6;
+  google.protobuf.Duration stale_duration = 7;
+  string org_id = 8;
+}
+
+// Response containing org's core repo.
+message CreateRepoResponse {
+  Repo repo = 1;
+}
+
+// Request to get org's core repo by id.
+message GetRepoByIDRequest {
+  string id = 1;
+}
+
+// Response to get org's core repo.
+message GetRepoByIDResponse {
+  Repo repo = 1;
+}
+
+// Request to get org's core repo by org_id.
+message GetOrgReposByOrgIDRequest {
+  string org_id = 1;
+}
+
+// Response to get org's core repo.
+message GetOrgReposByOrgIDResponse {
+  Repo repo = 1;
+}
+
+message RepoExtended {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string org_id = 4;
+  string name = 5;
+  ctrlplane.events.v1.RepoHook hook = 6;
+  string hook_id = 7;
+  string default_branch = 8;
+  bool is_monorepo = 9;
+  int32 threshold = 10;
+  google.protobuf.Duration stale_duration = 11;
+  string url = 12;
+  bool is_active = 13;
+  bool chat_enabled = 14;
+  string channel_name = 15;
+}
+
+message ListReposResponse {
+  repeated RepoExtended repos = 1;
+}
+
+service RepoService {
+  // Create org's core repo.
+  rpc CreateRepo(CreateRepoRequest) returns (CreateRepoResponse);
+
+  // Get org's core repo by id.
+  rpc GetRepoByID(GetRepoByIDRequest) returns (GetRepoByIDResponse);
+
+  // Get org's core repo by org_id.
+  rpc GetOrgReposByOrgID(GetOrgReposByOrgIDRequest) returns (GetOrgReposByOrgIDResponse);
+
+  // List all org's repos.
+  rpc ListRepos(google.protobuf.Empty) returns (ListReposResponse);
+}

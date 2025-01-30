@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+import "ctrlplane/events/v1/commit.proto";
+import "google/protobuf/timestamp.proto";
+
+message Push {
+  string ref = 1;
+  string before = 2;
+  string after = 3;
+  string repository = 4;
+  int64 sender_id = 5;
+  repeated ctrlplane.events.v1.Commit commits = 6;
+  google.protobuf.Timestamp timestamp = 7;
+}

@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package ctrlplane.auth.v1;
+
+import "ctrlplane/auth/v1/enums.proto";
+import "google/protobuf/timestamp.proto";
+import "buf/validate/validate.proto";
+
+// Represents an external account associated with a user.
+message Account {
+  string id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  google.protobuf.Timestamp updated_at = 3;
+  string user_id = 4 [(buf.validate.field).string.uuid = true];
+  ctrlplane.auth.v1.AuthProvider provider = 5;
+  string provider_account_id = 6 [(buf.validate.field).string = { min_len: 1}];
+  google.protobuf.Timestamp expires_at = 7;
+  string kind = 8;
+}
+
+// Request to retrieve an account by its provider and identifier.
+message GetAccountByProviderAccountIDRequest {
+  ctrlplane.auth.v1.AuthProvider provider = 1;
+  string provider_account_id = 2 [(buf.validate.field).string = {min_len: 1}];
+}
+
+// Response containing the account retrieved by provider and identifier.
+message GetAccountByProviderAccountIDResponse {
+  Account account = 1;
+}
+
+// Request to retrieve accounts associated with a specific user.
+message GetAccountsByUserIDRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+// Response containing the accounts associated with a user.
+message GetAccountsByUserIDResponse {
+  repeated Account accounts = 1;
+}
+
+// Request to create a new external account.
+message CreateAccountRequest {
+  string user_id = 1 [(buf.validate.field).string.uuid = true];
+  ctrlplane.auth.v1.AuthProvider provider = 2;
+  string provider_account_id = 3 [(buf.validate.field).string = {min_len: 1}];
+  google.protobuf.Timestamp expires_at = 4;
+  string kind = 5;
+}
+
+// Response containing the newly created external account.
+message CreateAccountResponse {
+  Account account = 1;
+}
+
+// Request to retrieve an account by its unique identifier.
+message GetAccountByIDRequest {
+  string id = 1;
+}
+
+// Response containing the account retrieved by ID.
+message GetAccountByIDResponse {
+  Account account = 1;
+}
+
+// Service providing methods for managing external accounts within the control plane.
+service AccountService {
+  // Retrieves an account by its provider and identifier.
+  rpc GetAccountByProviderAccountID(GetAccountByProviderAccountIDRequest) returns (GetAccountByProviderAccountIDResponse);
+
+  // Retrieves accounts associated with a specific user.
+  rpc GetAccountsByUserID(GetAccountsByUserIDRequest) returns (GetAccountsByUserIDResponse);
+
+  // Creates a new external account.
+  rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+
+  // Retrieves an account by its unique identifier.
+  rpc GetAccountByID(GetAccountByIDRequest) returns (GetAccountByIDResponse);
+}

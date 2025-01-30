@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package ctrlplane.events.v1;
+
+import "ctrlplane/events/v1/author.proto";
+import "google/protobuf/timestamp.proto";
+
+// Commit represents a commit in a repository
+message Commit {
+  string sha = 1; // SHA hash of the commit
+  string message = 2; // Commit message
+  string url = 3; // URL to the commit on the remote repository
+  repeated string added = 4; // Files added in this commit
+  repeated string removed = 5; // Files removed in this commit
+  repeated string modified = 6; // Files modified in this commit
+  ctrlplane.events.v1.Author author = 7; // Author of the commit
+  ctrlplane.events.v1.Author committer = 8; // Committer of the commit
+  google.protobuf.Timestamp timestamp = 9; // Timestamp of the commit
+}

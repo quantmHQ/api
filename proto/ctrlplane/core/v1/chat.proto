@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package ctrlplane.core.v1;
+
+enum ChannelKind {
+  CHANNEL_KIND_UNSPECIFIED = 0;
+  CHANNEL_KIND_DEFAULT = 1;
+  CHANNEL_KIND_USER = 2;
+}
+
+message Channel {
+  ChannelKind kind = 1;
+  string credentials = 2;
+  string id = 3;
+  string name = 4;
+}
