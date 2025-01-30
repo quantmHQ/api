@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
+import "buf/validate/validate.proto";
 import "ctrlplane/events/v1/hooks.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
@@ -14,7 +15,7 @@ message OrgHooks {
 
 // Represents an organization within the control plane.
 message Org {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string name = 4;
@@ -38,7 +39,7 @@ message CreateOrgResponse {
 // GetOrgByIDRequest is the request to retrieve an organization by its unique
 // identifier.
 message GetOrgByIDRequest {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 // GetOrgByIDResponse is the response to retrieving an organization by its unique
@@ -49,7 +50,7 @@ message GetOrgByIDResponse {
 
 // SetOrgHooksRequest is the request to set the hooks for an organization.
 message SetOrgHooksRequest {
-  string org_id = 1;
+  string org_id = 1 [(buf.validate.field).string.uuid = true];
   OrgHooks hooks = 2;
 }
 

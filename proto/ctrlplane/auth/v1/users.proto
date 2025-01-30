@@ -70,7 +70,7 @@ message GetUserByEmailResponse {
 
 // Request to retrieve a user by their unique identifier.
 message GetUserByIDRequest {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 // Response containing the user retrieved by ID.

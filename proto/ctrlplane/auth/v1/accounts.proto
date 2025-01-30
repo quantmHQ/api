@@ -2,18 +2,18 @@ syntax = "proto3";
 
 package ctrlplane.auth.v1;
 
+import "buf/validate/validate.proto";
 import "ctrlplane/auth/v1/enums.proto";
 import "google/protobuf/timestamp.proto";
-import "buf/validate/validate.proto";
 
 // Represents an external account associated with a user.
 message Account {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
   google.protobuf.Timestamp created_at = 2;
   google.protobuf.Timestamp updated_at = 3;
   string user_id = 4 [(buf.validate.field).string.uuid = true];
   ctrlplane.auth.v1.AuthProvider provider = 5;
-  string provider_account_id = 6 [(buf.validate.field).string = { min_len: 1}];
+  string provider_account_id = 6 [(buf.validate.field).string = {min_len: 1}];
   google.protobuf.Timestamp expires_at = 7;
   string kind = 8;
 }
@@ -55,7 +55,7 @@ message CreateAccountResponse {
 
 // Request to retrieve an account by its unique identifier.
 message GetAccountByIDRequest {
-  string id = 1;
+  string id = 1 [(buf.validate.field).string.uuid = true];
 }
 
 // Response containing the account retrieved by ID.
